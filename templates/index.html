@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_content %}
+    <body style="background-color:#6c757d;"></body>
+    <div class="jumbotron">
+        <img style="width: 80%"
+
+             src="https://media.istockphoto.com/id/955952680/photo/passengers-commercial-airplane-flying-above-clouds.jpg?s=1024x1024&w=is&k=20&c=khuFYIwkgYzEnSKoatWkjOZkveBIrnvzO_eaafUgBh8=" alt="">
+        <a href="#" class="btn btn-lg btn-secondary">Register</a>
+        <div class="position-sticky">
+            <h1 class="display-4">Welcome to ValAvio</h1>
+            <p class="lead">Share your photos.</p>
+            <hr class="my-4">
+            <div class="flex-row">
+{#            <div class="actionBtn">#}
+
+                <!-- Login Button -->
+{#                <a href="{% url 'login user' %}" class="btn btn-lg btn-secondary">Login</a>#}
+
+                <!-- Register Button -->
+
+{#                <a href="{% url 'register' %}" style="color:#dc3545;">Register Profile</a>#}
+{#                <li><a href="{% url 'register' %}" style="color:#dc3545;">Register Profile</a></li>#}
+
+{#                <a href="{% url 'login user' %}" style="color:#dc3545;">Login</a>#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
