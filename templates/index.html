@@ -2,17 +2,18 @@
 {% load static %}
 {% block page_content %}
     <body style="background-color:#6c757d;"></body>
+    <h1 class="display-4">Welcome to Occasion</h1>
+    <a href="#" class="btn btn-lg btn-secondary">Register</a>
+    <a href="#" class="btn btn-lg btn-secondary">Login</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-lg btn-secondary">All Cars</a>
     <div class="jumbotron">
-        <img style="width: 80%"
-
-             src="https://media.istockphoto.com/id/955952680/photo/passengers-commercial-airplane-flying-above-clouds.jpg?s=1024x1024&w=is&k=20&c=khuFYIwkgYzEnSKoatWkjOZkveBIrnvzO_eaafUgBh8=" alt="">
-        <a href="#" class="btn btn-lg btn-secondary">Register</a>
+        <img style="width: 90%"
+             src="{% static '/images/occasion2.jpg' %}" alt="">
         <div class="position-sticky">
-            <h1 class="display-4">Welcome to ValAvio</h1>
-            <p class="lead">Share your photos.</p>
-            <hr class="my-4">
+
+{#            <hr class="my-4">#}
             <div class="flex-row">
-{#            <div class="actionBtn">#}
+            <div class="actionBtn">
 
                 <!-- Login Button -->
 {#                <a href="{% url 'login user' %}" class="btn btn-lg btn-secondary">Login</a>#}
@@ -26,5 +27,5 @@
             </div>
         </div>
     </div>
-
+    </div>
 {% endblock %}
