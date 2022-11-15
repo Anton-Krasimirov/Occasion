@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from Occasion.accounts.models import UserProfile
+
+
+@admin.register(UserProfile)
+class ProfileAdmin(admin.ModelAdmin):
+
+    list_display = ('first_name', 'last_name')

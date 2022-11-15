@@ -1,8 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 from Occasion.accounts.models import OccasionUser
 from Occasion.accounts.validators import MaxFileSizeInValidator
 
+UserModel = get_user_model()
 
 class Car(models.Model):
 
@@ -35,7 +37,7 @@ class Car(models.Model):
 
     price = models.FloatField()
 
-    user = models.ForeignKey(OccasionUser, on_delete=models.CASCADE,)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE,)# TODO prowero relaciqta
 
     def __str__(self):
         return f'{self.brand} {self.model}'
@@ -49,4 +51,4 @@ class CarPhoto(models.Model):
 
     publication_date = models.DateTimeField(auto_now_add=True,)
 
-    user = models.ForeignKey(OccasionUser, on_delete=models.CASCADE,)
+    user = models.ForeignKey(Car, on_delete=models.CASCADE,)# TODO prowero relaciqta

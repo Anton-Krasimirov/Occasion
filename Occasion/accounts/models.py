@@ -9,7 +9,7 @@ class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     email = models.EmailField(unique=True, null=False, blank=False,)
 
-    # is_staff = models.BooleanField(default=False, )
+    # is_staff = models.BooleanField(default=False, )# TODO trqbwa li mi ?
 
     date_joined = models.DateTimeField(auto_now_add=True,)
 
@@ -32,7 +32,9 @@ class UserProfile(models.Model):
 
     email = models.EmailField(unique=True, null=False, blank=False,)
     # TODO phone validator
-    phone = models.IntegerField(null=False, blank=False,)
+    phone = models.CharField(max_length=30, unique=True, null=False, blank=False,)
+
+    region = models.CharField(max_length=30, unique=True, null=False, blank=False,)
 
     gender = models.CharField(
         max_length=max(len(x) for x, _ in GENDERS),
@@ -49,3 +51,22 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+
+class FirmProfile(models.Model):
+
+    firm_name = models.CharField(max_length=30, validators=(validate_only_letters,))
+
+    email = models.EmailField(unique=True, null=False, blank=False, )
+
+    region = models.CharField(max_length=30, unique=True, null=False, blank=False, )
+
+    address = models.TextField(null=False, blank=False,)
+
+    phone = models.IntegerField(unique=True, null=False, blank=False, )
+
+    user = models.OneToOneField(
+        OccasionUser,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )# TODO prowero relaciqta

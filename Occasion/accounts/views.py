@@ -1,13 +1,16 @@
-from django.contrib.auth import views
+from django.contrib.auth import views as auth_view
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views import generic as views
+from Occasion.accounts.forms import UserCreateForm
 
 
-class UserRegisterView:
-    pass
+class UserRegisterView(views.CreateView):
+    form_class = UserCreateForm
+    template_name = 'accounts/create_profile.html'
+    success_url = reverse_lazy('dashboard')
 
-
-class UserLoginView(views.LoginView):
+class UserLoginView(auth_view.LoginView):
     template_name = 'accounts/login_page.html'
     success_url = reverse_lazy('dashboard')
 
