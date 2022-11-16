@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from Occasion.accounts.managers import OccasionUserManager
 from Occasion.accounts.validators import validate_only_letters
 
-
+# This is a custom user model
 class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     email = models.EmailField(unique=True, null=False, blank=False,)
@@ -39,9 +39,9 @@ class UserProfile(models.Model):
     gender = models.CharField(
         max_length=max(len(x) for x, _ in GENDERS),
         choices=GENDERS,
+        default=DO_NOT_SHOW,# TODO fix defoult, is not correct
         null=True,
         blank=True,
-        default=DO_NOT_SHOW,
     )
     user = models.OneToOneField(
         OccasionUser,

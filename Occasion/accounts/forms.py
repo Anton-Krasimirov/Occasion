@@ -1,24 +1,22 @@
-
 from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
 
 from Occasion.accounts.helpers import BootstrapFormMixin
-from Occasion.accounts.models import UserProfile
+from Occasion.accounts.models import UserProfile, FirmProfile
 
 
 class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
+    first_name = forms.CharField(max_length=30, )
 
-    first_name = forms.CharField(max_length=30,)
+    last_name = forms.CharField(max_length=30, )
 
-    last_name = forms.CharField(max_length=30,)
-
-    email = forms.EmailField()
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
     phone = forms.CharField()
 
     region = forms.CharField(max_length=30, required=False)
 
-    gender = forms.ChoiceField(choices=UserProfile.GENDERS,)
+    gender = forms.ChoiceField(choices=UserProfile.GENDERS, )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -41,9 +39,50 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
             profile.save()
         return user
 
-    class Meta:
+    class Meta:  # TODO fix the widget fields , Enter your phone nomber
         model = get_user_model()
         fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'phone', 'gender', 'region')
         widgets = {
-            'phone': forms.NumberInput(attrs={'placeholder': 'Enter yor phone number',})
+            'phone': forms.NumberInput(attrs={'placeholder': 'Enter your phone number', })
+        }
+
+
+class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
+
+    firm_name = forms.CharField(max_length=30, )
+
+    email = forms.EmailField(max_length=254, help_text='Inform a valid email address.')
+
+    region = forms.CharField(max_length=30, )
+
+    address = forms.CharField(widget=forms.Textarea,)
+
+    phone = forms.CharField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
+
+    def save(self, commit=True):
+        user = super().save(commit=commit)
+
+
+        profile = FirmProfile(
+
+            firm_name=self.cleaned_data['firm_name'],
+            email=self.cleaned_data['email'],
+            region=self.cleaned_data['region'],
+            address=self.cleaned_data['address'],
+            phone=self.cleaned_data['phone'],
+            user=user,
+        )
+        if commit:
+            profile.save()
+        return user
+
+    class Meta:
+        model = get_user_model()
+        fields = ('firm_name', 'password1', 'password2', 'email', 'phone', 'region', 'address')
+        widgets = {
+            'phone': forms.NumberInput(attrs={'placeholder': 'Enter your phone number', })
         }
