@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 from Occasion.accounts.forms import UserCreateForm, FirmProfileCreateForm
+from Occasion.accounts.models import UserProfile
 
 
 class UserRegisterView(views.CreateView):
@@ -25,8 +26,10 @@ class FirmRegisterView(views.CreateView):
     success_url = reverse_lazy('dashboard')
 
 
-class UserDetailView:
-    pass
+class UserDetailView(views.DetailView):
+    model = UserProfile
+    template_name = 'accounts/profile_detail.html'
+    context_object_name = 'profile'
 
 
 class EditProfileView:

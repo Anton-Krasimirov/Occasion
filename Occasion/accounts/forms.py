@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
 
+
 from Occasion.accounts.helpers import BootstrapFormMixin
 from Occasion.accounts.models import UserProfile, FirmProfile
 
@@ -10,9 +11,9 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     last_name = forms.CharField(max_length=30, )
 
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    email = forms.EmailField(max_length=254, )
 
-    phone = forms.CharField()
+    phone = forms.CharField(max_length=15,)
 
     region = forms.CharField(max_length=30, required=False)
 
@@ -51,13 +52,13 @@ class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     firm_name = forms.CharField(max_length=30, )
 
-    email = forms.EmailField(max_length=254, help_text='Inform a valid email address.')
+    email = forms.EmailField(max_length=254, )
 
     region = forms.CharField(max_length=30, )
 
-    address = forms.CharField(widget=forms.Textarea,)
+    address = forms.CharField(widget=forms.Textarea(attrs={'rows': 3,}), )
 
-    phone = forms.CharField()
+    phone = forms.CharField(max_length=15,)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -83,6 +84,3 @@ class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
     class Meta:
         model = get_user_model()
         fields = ('firm_name', 'password1', 'password2', 'email', 'phone', 'region', 'address')
-        widgets = {
-            'phone': forms.NumberInput(attrs={'placeholder': 'Enter your phone number', })
-        }
