@@ -1,29 +1,17 @@
 {% extends 'base.html' %}
 {% block page_content %}
-    <body style="background-color:#0dcaf0;"></body>
+    <body style="background-color:#198754;"></body>
     <div class="row justify-content-center">
         <div class="d-flex">
             <div class="d-inline p-2 w-50">
-            {% if profile.first_name %}
-                <h1><u>This is User Profile</u></h1>
-            {% else %}
                 <h1><u>This is Firm Profile</u></h1>
-            {% endif %}
             </div>
             <div class="d-inline p-2 w-50">
 
 
                 <div class="d-flex flex-column">
-                    {% if profile.first_name %}
-                        <h5><u>User Name:</u> {{ profile.first_name }} {{ profile.last_name }}</h5>
-                    {% endif %}
-                {% if profile.firm_name %}
-                        <h5><u>firm Name:</u> {{ profile.firm_name }}</h5>
-                    {% endif %}
+                    <h5><u>Firm Name:</u> {{ profile.firm_name }}</h5>
 
-                    {% if profile.address %}
-                        <h5><u>Address:</u> {{ profile.address }}</h5>
-                    {% endif %}
                     {% if profile.email %}
                         <h5><u>Email:</u> {{ profile.email }}</h5>
                     {% endif %}

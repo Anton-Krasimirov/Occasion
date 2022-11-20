@@ -13,11 +13,9 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     email = forms.EmailField(max_length=254, )
 
-    phone = forms.CharField(max_length=15,)
+    phone = forms.IntegerField(max_value=10,)
 
     region = forms.CharField(max_length=30, required=False)
-
-    gender = forms.ChoiceField(choices=UserProfile.GENDERS, )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,7 +30,6 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
             email=self.cleaned_data['email'],
             phone=self.cleaned_data['phone'],
             region=self.cleaned_data['region'],
-            gender=self.cleaned_data['gender'],
             user=user,
         )
 
@@ -42,7 +39,7 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     class Meta:  # TODO fix the widget fields , Enter your phone nomber
         model = get_user_model()
-        fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'phone', 'gender', 'region')
+        fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'phone', 'region')
         widgets = {
             'phone': forms.NumberInput(attrs={'placeholder': 'Enter your phone number', })
         }
@@ -58,7 +55,7 @@ class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     address = forms.CharField(widget=forms.Textarea(attrs={'rows': 3,}), )
 
-    phone = forms.CharField(max_length=15,)
+    phone = forms.IntegerField(max_value=10,)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

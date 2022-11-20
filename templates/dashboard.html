@@ -2,17 +2,24 @@
 {% load static %}
 {% block page_content %}
     <body style="background-color:#6c757d;"></body>
+
     <div class="jumbotron">
-        <img style="width: 70%"
-
-             src="https://media.istockphoto.com/id/955952680/photo/passengers-commercial-airplane-flying-above-clouds.jpg?s=1024x1024&w=is&k=20&c=khuFYIwkgYzEnSKoatWkjOZkveBIrnvzO_eaafUgBh8=" alt="">
-
+    <hr class="my-6">
+        {{ context }}
+        <img style="width: 80%" src="{% static '/images/occasion2.jpg' %}" alt="">
         <div class="position-sticky">
             <h1 class="display-4">Welcome to Occasion</h1>
 
-            <a href="{% url 'profile details' user.pk %}" class="btn btn-primary">Profile</a>
+            {% if request.user.is_authenticated %}
+                <h2>Profile of {{ request.user.firmprofile }}</h2>
+                {% if not request.user.firmprofile %}
+                <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Profile</a>
+                {% else %}
+                <a href="{% url 'firm details' request.user.id %}" class="btn btn-primary"> Firm Profile</a>
+                {% endif %}
+            {% endif %}
 
-            <hr class="my-4">
+            <hr class="my-6">
             <div class="flex-row">
 
                 <!-- Login Button -->
@@ -23,5 +30,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

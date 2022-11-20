@@ -12,7 +12,6 @@ class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     email = models.EmailField(unique=True, null=False, blank=False,)
 
-
     date_joined = models.DateTimeField(auto_now_add=True,)
 
     USERNAME_FIELD = 'email'
@@ -22,29 +21,16 @@ class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
 class UserProfile(models.Model):
 
-    MALE = 'Male'
-    FEMALE = 'Female'
-    DO_NOT_SHOW = 'Do not show'
-
-    GENDERS = [(x, x) for x in (MALE, FEMALE, DO_NOT_SHOW)]
-
-    first_name = models.CharField(max_length=30, validators=(validate_only_letters,))
+    first_name = models.CharField(max_length=30, null=False, blank=False, validators=(validate_only_letters,))
 
     last_name = models.CharField(max_length=30, null=False, blank=False, validators=(validate_only_letters,))
 
     email = models.EmailField(unique=True, null=False, blank=False,)
 
-    phone = models.CharField(max_length=15, null=False, blank=False,)
+    phone = models.IntegerField(null=False, blank=False,)
 
-    region = models.CharField(max_length=30, unique=True, null=False, blank=False,)
+    region = models.CharField(max_length=30, null=False, blank=False,)
 
-    gender = models.CharField(
-        max_length=max(len(x) for x, _ in GENDERS),
-        choices=GENDERS,
-        default=DO_NOT_SHOW,# TODO fix defoult, is not correct
-        null=True,
-        blank=True,
-    )
     user = models.OneToOneField(
         OccasionUser,
         on_delete=models.CASCADE,
@@ -57,15 +43,15 @@ class UserProfile(models.Model):
 
 class FirmProfile(models.Model):
 
-    firm_name = models.CharField(max_length=30, validators=(validate_only_letters,))
+    firm_name = models.CharField(max_length=30, null=False, blank=False, validators=(validate_only_letters,))
 
     email = models.EmailField(unique=True, null=False, blank=False, )
 
-    region = models.CharField(max_length=30, unique=True, null=False, blank=False, )
+    region = models.CharField(max_length=30, null=False, blank=False, )
 
     address = models.TextField(null=False, blank=False,)
 
-    phone = models.CharField(max_length=15, null=False, blank=False,)
+    phone = models.IntegerField(null=False, blank=False,)
 
     user = models.OneToOneField(
         OccasionUser,
