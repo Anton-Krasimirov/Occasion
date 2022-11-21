@@ -51,4 +51,4 @@ class CarPhoto(models.Model):
 
     publication_date = models.DateTimeField(auto_now_add=True,)
 
-    user = models.ForeignKey(Car, on_delete=models.CASCADE,)# TODO prowero relaciqta
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE,)# TODO prowero relaciqta
