@@ -11,12 +11,13 @@
             <h1 class="display-4">Welcome to Occasion</h1>
 
             {% if request.user.is_authenticated %}
-                <h2>Profile of {{ request.user.firmprofile }}</h2>
-                {% if not request.user.firmprofile %}
-                <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Profile</a>
-                {% else %}
-                <a href="{% url 'firm details' request.user.id %}" class="btn btn-primary"> Firm Profile</a>
-                {% endif %}
+
+                    {% if not request.user.firmprofile %}
+                    <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Profile</a>
+                    {% else %}
+                    <a href="{% url 'firm details' request.user.id %}" class="btn btn-primary"> Firm Profile</a>
+                    {% endif %}
+
             {% endif %}
 
             <hr class="my-6">

@@ -1,7 +1,6 @@
 from django.db import models
-from django.contrib.auth import models as auth_models
+from django.contrib.auth import models as auth_models, get_user_model
 from django.contrib.auth.models import User
-
 
 from Occasion.accounts.managers import OccasionUserManager
 from Occasion.accounts.validators import validate_only_letters
@@ -17,6 +16,7 @@ class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     objects = OccasionUserManager()
+
 
 
 class UserProfile(models.Model):
@@ -35,7 +35,7 @@ class UserProfile(models.Model):
         OccasionUser,
         on_delete=models.CASCADE,
         primary_key=True,
-    )
+    )# TODO при delete user, не трие от таблицата accounts_occasionusers ВИЖ ПРОБЛЕМА !!!
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

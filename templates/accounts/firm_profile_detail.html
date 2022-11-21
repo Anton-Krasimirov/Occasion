@@ -26,8 +26,8 @@
                     {% endif %}
                 </div>
                 <a href="#" class="btn btn-lg btn-secondary">Dashboard</a>
-                <a href="#" class="btn btn-lg btn-secondary">Edit profile</a>
-                <a href="#" class="btn btn-lg btn-secondary">Delete profile</a>
+                <a href="{% url 'edit firm' user.pk %}" class="btn btn-lg btn-secondary">Edit profile</a>
+                <a href="{% url 'firm delete' user.pk %}" class="btn btn-lg btn-secondary">Delete profile</a>
                 <a href="#" class="btn btn-lg btn-secondary">Add new Car</a>
                 {% if is_owner %}
 {#                    <a href="{% url 'edit profile' %}" class="btn btn-primary">Edit</a>#}
