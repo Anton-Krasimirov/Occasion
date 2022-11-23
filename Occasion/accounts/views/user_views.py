@@ -54,7 +54,8 @@ class EditProfileView(views.UpdateView):
 
 
 class DeleteUserProfileView(views.DeleteView):
-    model = UserProfile
+    # form_class = UserDeleteForm
+    model = get_user_model()
     template_name = 'accounts/delete_user.html'
     success_url = reverse_lazy('index')
 
