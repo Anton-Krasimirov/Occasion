@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic as views
 
 from Occasion.accounts.models import OccasionUser
+from Occasion.main.models import CarPhoto
 
 
 class HomePageView(views.TemplateView):
@@ -9,7 +10,7 @@ class HomePageView(views.TemplateView):
 
 
 class DashboardView(views.ListView):
-    model = OccasionUser# TODO delete import OccasionUser
+    model = CarPhoto# TODO delete import OccasionUser
     #TODO model =  da pokazwa wsichki koli
     template_name = 'dashboard.html'
-    # TODO context_object_name =
+    context_object_name = 'car_photos'

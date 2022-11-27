@@ -12,8 +12,20 @@ class Car(models.Model):
     GASOLINE = "Gasoline"
     HYBRID = "Hybrid"
     ELECTRIC = "Electric"
+
     MANUAL = "Manual"
     AUTOMATIC = "Automatic"
+
+    CARGO_VAN = 'Cargo van'
+    COUPE = 'Coupe'
+    HATCHBACK = 'Hatchback'
+    MINIVAN = 'Minivan'
+    SUV = 'SUV'
+    SEDAN = 'Sedan'
+    WAGON = 'Wagon'
+    COMBI = 'Combi'
+
+    BODY_STYLES = [(x, x) for x in (CARGO_VAN, COMBI, COUPE, HATCHBACK, MINIVAN, SUV, SEDAN, WAGON)]
 
     TYPE_TRANSMISSION = [(x, x) for x in (MANUAL, AUTOMATIC,)]
 
@@ -23,11 +35,11 @@ class Car(models.Model):
 
     model = models.CharField(max_length=15, null=False, blank=False,)
 
-    description = models.CharField(max_length=255, null=True, blank=True,)
+    body_style = models.CharField(max_length=max(len(x) for (x, _) in BODY_STYLES), choices=BODY_STYLES, null=True, blank=True,)
 
-    km = models.PositiveIntegerField()
+    km = models.CharField(max_length=15, null=False, blank=False,)# TODO fix the field
 
-    first_reg_date = models.DateField()# TODO провери дата format?
+    first_reg_date = models.DateField(null=False, blank=False,)
 
     transmission = models.CharField(max_length=max(len(x) for (x, _) in TYPE_TRANSMISSION), choices=TYPE_TRANSMISSION,)
 
@@ -35,7 +47,9 @@ class Car(models.Model):
 
     color = models.CharField(max_length=15,)
 
-    price = models.FloatField()
+    price = models.CharField(max_length=15, null=False, blank=False,)
+
+    photo = models.URLField(null=False, blank=False,)
 
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE,)# TODO prowero relaciqta
 
@@ -44,11 +58,12 @@ class Car(models.Model):
 
 
 class CarPhoto(models.Model):
+    photo = models.URLField()
 
-    photo = models.ImageField(validators=(
-        MaxFileSizeInValidator,
-    ),)
+    # photo = models.ImageField(validators=(
+    #     MaxFileSizeInValidator,
+    # ),)
 
-    publication_date = models.DateTimeField(auto_now_add=True,)
+    description = models.CharField(max_length=150, null=True, blank=True,)
 
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE,)# TODO prowero relaciqta

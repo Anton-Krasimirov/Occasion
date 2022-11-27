@@ -13,7 +13,7 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     email = forms.EmailField(max_length=254, )
 
-    phone = forms.IntegerField(max_value=10,)
+    phone = forms.CharField(max_length=10, required=False,)
 
     region = forms.CharField(max_length=30, required=False)
 
@@ -55,7 +55,7 @@ class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     address = forms.CharField(widget=forms.Textarea(attrs={'rows': 3,}), )
 
-    phone = forms.IntegerField(max_value=10,)
+    phone = forms.CharField(max_length=10, required=False,)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
