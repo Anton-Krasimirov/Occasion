@@ -12,12 +12,11 @@ class CreateCarView(views.CreateView):
     form_class = CreatCarProfileForm
 
     def get_success_url(self):
-        return reverse_lazy('car details',  kwargs={'pk': self.object.id},)
+        return reverse_lazy('car details', kwargs={'pk': self.object.id}, )
 
-
-    def get_form_kwargs(self):# overwrite the function in FormMixin
+    def get_form_kwargs(self):  # overwrite the function in FormMixin
         kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user # пренаписваме го и добавяме user , трябва ни в CreatePetForm
+        kwargs['user'] = self.request.user  # пренаписваме го и добавяме user , трябва ни в CreatePetForm
         return kwargs
 
 
@@ -35,9 +34,10 @@ class CarDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
     #     context['car'] = Car.objects.filter(pk=self.kwargs.get('pk'))
 
 
-
 class EditCarView(views.UpdateView):
     pass
+
+
 # TODO form_class and template_name
 
 

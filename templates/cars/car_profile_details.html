@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
+    <body style="background-color:#20c997;"></body>
     <h1 class='text-center'>
-        {% if cars %}
+        {% if car %}
             All Car Photos
         {% else %}
             No car photos yet
@@ -12,32 +13,32 @@
     {% if car %}
         <div class="container mb-5">
             <div class="row mb-5">
-{#                {% for pet_photo in pet_photos %}#}
-                    <div class="card ml-3 mb-3" style="width: 18rem;">
+{#                {% for car_photo in cars_photos %}#}
+                    <div class="card ml-3 mb-3" style="width: 15rem;">
                         <!-- Image -->
                         <img src="{{ car.photo }}"
                              class="card-img-top" alt="Photo description">
                         <div class="card-body">
 {#                            {% for pet in pet_photo.tagged_pets.all %}#}
-                                <h5 class="card-title">{{ car.model }}{% if car.km %}
-                                    {{ car.km }}
-                                    {#                                    {{ pet.date_of_birth|years_to_now }}#}
-                                {% endif %}</h5>
+                                <h5 class="card-title">{{ car.brand }}{{ car.model }}</h5>
+                                 <p class="card-text">First registration : {{ car.first_reg_date }}</p>
+                                <p class="card-text">Transmission : {{ car.transmission }}</p>
+                                <p class="card-text">Fuel : {{ car.fuel }}</p>
+                                <p class="card-text">{{ car.km }} KM</p>
+
 {#                            {% endfor %}#}
+                            <!-- if is_owner butons edit , delete -->
+                            <!-- if is_login owner phone -->
+                            <!-- if available for every photo -->
                             <!-- First 30 chars from the description -->
-                            <p class="card-text">{{ car.price }}</p>
+                                <p class="card-text">Price : {{ car.price }} Euro</p>
                             <!-- Button to the Photo Details Page -->
-{#                            <a href="{% url 'pet photo details' pet_photo.id %}" class="btn btn-primary">See details</a>#}
+{#                            <a href="{% url 'eidt advatisement' car.id %}" class="btn btn-primary">Edit</a>#}
                         </div>
                     </div>
 {#                {% endfor %}#}
             </div>
         </div>
-{#    {% else %}#}
-{#        <div class=" row d-flex justify-content-center align-content-center">#}
-{#            <a href="{% url 'create pet photo' %}" class="btn btn-lg btn-secondary row align-self-baseline">Add#}
-{#                Photo</a>#}
-{#        </div>#}
     {% endif %}
 
 {% endblock %}
