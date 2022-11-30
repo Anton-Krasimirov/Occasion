@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="d-flex">
             <div class="d-inline p-2 w-50">
-                <h1><u>This is Firm Profile</u></h1>
+                <h1><u>{{ profile.firm_name}} Firm Profile</u></h1>
             </div>
             <div class="d-inline p-2 w-50">
 
@@ -25,14 +25,38 @@
                         <h5><u>Region:</u> {{ profile.region }}</h5>
                     {% endif %}
                 </div>
-                <a href="#" class="btn btn-lg btn-secondary">Dashboard</a>
+                <a href="{% url 'dashboard' %}" class="btn btn-lg btn-secondary">Dashboard</a>
                 <a href="{% url 'edit firm' user.pk %}" class="btn btn-lg btn-secondary">Edit profile</a>
                 <a href="{% url 'firm delete' user.pk %}" class="btn btn-lg btn-secondary">Delete profile</a>
-                <a href="#" class="btn btn-lg btn-secondary">Add new Car</a>
-                {% if is_owner %}
-{#                    <a href="{% url 'edit profile' %}" class="btn btn-primary">Edit</a>#}
-{#                    <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>#}
-                {% endif %}
+                <a href="{% url 'create car' %}" class="btn btn-lg btn-secondary">Add Advisement</a>
+        {% if cars %}
+            {% for car in cars %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card ml-3 mb-3" style="width: 12rem;">
+                                <img src="{{ car.photo }}"
+                                     class="card-img-top" alt="Photo description">
+                                <div class="card-body">
+
+                                    <h5 class="card-title">{{ car.brand }}{{ car.model }}</h5>
+                                    <p class="card-text">First registration : {{ car.first_reg_date }}</p>
+                                    <p class="card-text">{{ car.transmission }}</p>
+                                    <p class="card-text">{{ car.fuel }}</p>
+
+                                    <div class="navbar">
+                                        <a href="{% url 'car details' car.pk %}"
+                                           class="btn btn-lg btn-secondary">Seе</a>
+                                        <a href="#" class="btn btn-lg btn-secondary">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+        {% endif %}
             </div>
         </div>
     </div>

@@ -15,12 +15,12 @@ class UserRegisterView(views.CreateView):
     template_name = 'accounts/create_profile.html'
     success_url = reverse_lazy('dashboard')
 
-    def form_valid(self, form):  # TODO за да не иска логин след регистрацията
-        result = super().form_valid(form)
-        # user => self.object
-        # request => self.request
-        login(self.request, self.object)
-        return result
+    # def form_valid(self, form):  # TODO за да не иска логин след регистрацията
+    #     result = super().form_valid(form)
+    #     # user => self.object
+    #     # request => self.request
+    #     login(self.request, self.object)
+    #     return result
 
 
 class UserLoginView(auth_view.LoginView, ContextMixin):
@@ -48,12 +48,9 @@ class UserDetailView(auth_mixin.LoginRequiredMixin, views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         cars = list(Car.objects.filter(user_id=self.object.user_id))
-        context.update({'cars': cars,})
+        context.update({'cars': cars, })
 
         return context
-
-
-
 
 
 class EditProfileView(views.UpdateView):

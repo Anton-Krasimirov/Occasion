@@ -29,16 +29,22 @@ class CarDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
     def get_queryset(self):
         return Car.objects.all()
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data()
-    #     context['car'] = Car.objects.filter(pk=self.kwargs.get('pk'))
 
 
 class EditCarView(views.UpdateView):
     pass
 
 
-# TODO form_class and template_name
+class AllCarsView(views.ListView):
+    model = Car
+    template_name = 'cars.all_cars_show.html'
+    context_object_name = 'all_cars'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_cars = context['object_list']
+        context.update({'user_cars': user_cars, })
+        return context
 
 
 class DeleteCarView(views.DeleteView):
