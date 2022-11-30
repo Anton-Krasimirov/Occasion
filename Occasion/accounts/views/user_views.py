@@ -1,4 +1,5 @@
 from django.contrib.auth import views as auth_view, get_user_model, login
+from django.contrib.auth import mixins as auth_mixin
 
 from django.urls import reverse_lazy
 from django.views import generic as views
@@ -6,6 +7,7 @@ from django.views.generic.base import ContextMixin
 
 from Occasion.accounts.forms import UserCreateForm
 from Occasion.accounts.models import UserProfile
+from Occasion.main.models import Car
 
 
 class UserRegisterView(views.CreateView):
@@ -38,10 +40,20 @@ class UserLoginView(auth_view.LoginView, ContextMixin):
         return super().get_success_url()
 
 
-class UserDetailView(views.DetailView):
+class UserDetailView(auth_mixin.LoginRequiredMixin, views.DetailView):
     model = UserProfile
     template_name = 'accounts/profile_detail.html'
     context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cars = list(Car.objects.filter(user_id=self.object.user_id))
+        context.update({'cars': cars,})
+
+        return context
+
+
+
 
 
 class EditProfileView(views.UpdateView):

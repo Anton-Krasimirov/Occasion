@@ -605,6 +605,7 @@ progress {
     margin-left: auto
 }
 
+
 @media (min-width: 576px) {
     .container, .container-sm {
         max-width: 540px
@@ -11645,6 +11646,7 @@ textarea.form-control-lg {
         display: none !important
     }
 }
+
 
 /*# sourceMappingURL=bootstrap.min.css.map */
 
