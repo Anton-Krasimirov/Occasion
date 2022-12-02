@@ -82,14 +82,3 @@ class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
         model = get_user_model()
         fields = ('firm_name', 'password1', 'password2', 'email', 'phone', 'region', 'address')
 
-
-# class UserDeleteForm(forms.ModelForm):
-#     def save(self, commit=True):
-#         userr = UserProfile.user.userprofile
-#         self.instance.delete()
-#         userr.delete()
-#         return self.instance
-#
-#     class Meta:
-#         model = get_user_model()
-#         fields = ()

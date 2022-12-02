@@ -1,6 +1,8 @@
 from django.urls import reverse_lazy
 from django.views import generic as views
-from django.contrib.auth import views as auth_views, get_user_model, login
+from django.contrib.auth import views as auth_views, get_user_model
+from django.views.generic.base import ContextMixin
+
 from Occasion.accounts.forms import FirmProfileCreateForm
 from Occasion.accounts.models import FirmProfile
 from Occasion.main.models import Car
@@ -17,6 +19,8 @@ class FirmRegisterView(views.CreateView):
     #     # request => self.request
     #     login(self.request, self.object)
     #     return result
+
+
 
 
 class FirmDetailView(views.DetailView):

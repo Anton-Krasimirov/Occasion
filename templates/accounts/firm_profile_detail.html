@@ -25,10 +25,11 @@
                         <h5><u>Region:</u> {{ profile.region }}</h5>
                     {% endif %}
                 </div>
-                <a href="{% url 'dashboard' %}" class="btn btn-lg btn-secondary">Dashboard</a>
-                <a href="{% url 'edit firm' user.pk %}" class="btn btn-lg btn-secondary">Edit profile</a>
-                <a href="{% url 'firm delete' user.pk %}" class="btn btn-lg btn-secondary">Delete profile</a>
-                <a href="{% url 'create car' %}" class="btn btn-lg btn-secondary">Add Advisement</a>
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-sm">Dashboard</a>
+                <a href="{% url 'edit firm' user.pk %}" class="btn btn-secondary btn-sm">Edit profile</a>
+                <a href="{% url 'firm delete' user.pk %}" class="btn btn-secondary btn-sm">Delete profile</a>
+                <a href="{% url 'create car' %}" class="btn btn-secondary btn-sm">Add Advisement</a>
+                <a href="{% url 'logout user' %}" class="btn btn-secondary btn-sm">Logout</a>
         {% if cars %}
             {% for car in cars %}
                 <div class="container">
@@ -43,11 +44,12 @@
                                     <p class="card-text">First registration : {{ car.first_reg_date }}</p>
                                     <p class="card-text">{{ car.transmission }}</p>
                                     <p class="card-text">{{ car.fuel }}</p>
-
+                                    <p class="card-text">{{ car.km }} KM</p>
+                                    <p class="card-text">Price : {{ car.price }} Euro</p>
                                     <div class="navbar">
                                         <a href="{% url 'car details' car.pk %}"
                                            class="btn btn-lg btn-secondary">Seе</a>
-                                        <a href="#" class="btn btn-lg btn-secondary">Edit</a>
+                                        <a href="{% url 'edit car' car.pk %}" class="btn btn-lg btn-secondary">Edit</a>
                                     </div>
                                 </div>
                             </div>

@@ -4,62 +4,25 @@
 <body style="background-color:#6c757d;"></body>
 
 <div class="jumbotron">
-    <hr class="my-6">
+
     <h1 class='text-center'>Welcome to Occasion</h1>
             <img style="width: 78%" src="{% static '/images/occasion3.jpg' %}" alt="">
-{#    <h1 class='text-center'>#}
-{#        {% if user_cars %}#}
-{#            All Cars#}
-{#        {% else %}#}
-{#            No car yet#}
-{#        {% endif %}#}
-{#    </h1>#}
-    <div class="position-sticky">
-        {{ context }}
+            <div class="btn-group-vertical">
 
+                    <a href="{% url 'logout user' %}" class="btn btn-primary">Logout</a>
 
-        {% if request.user.is_authenticated %}
+                    <a href="{% url 'all cars' %}" class="btn btn-primary">All Cars</a>
 
-            {% if not request.user.firmprofile %}
-                <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Profile</a>
-            {% else %}
-                <a href="{% url 'firm details' request.user.id %}" class="btn btn-primary"> Firm Profile</a>
-            {% endif %}
+                    {% if request.user.is_authenticated %}
 
-{#        {% endif %}#}
-{#            {% if user_cars %}#}
-{#            {% for car in user_cars %}#}
-{#                <div class="container">#}
-{#                    <div class="row">#}
-{#                        <div class="col">#}
-{#                            <div class="card ml-3 mb-3" style="width: 12rem;">#}
-{#                                <img src="{{ car.photo }}"#}
-{#                                     class="card-img-top" alt="Photo description">#}
-{#                                <div class="card-body">#}
-{##}
-{#                                    <h5 class="card-title">{{ car.brand }}{{ car.model }}</h5>#}
-{#                                    <p class="card-text">First registration : {{ car.first_reg_date }}</p>#}
-{#                                    <p class="card-text">{{ car.transmission }}</p>#}
-{#                                    <p class="card-text">{{ car.fuel }}</p>#}
-{##}
-{#                                    <div class="navbar">#}
-{#                                        <a href="{% url 'car details' car.pk %}"#}
-{#                                           class="btn btn-lg btn-secondary">Seе</a>#}
-{#                                        <a href="#" class="btn btn-lg btn-secondary">Edit</a>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                </div>#}
-{#            {% endfor %}#}
-        {% endif %}
+                        {% if not request.user.firmprofile %}
+                            <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Profile</a>
+                        {% else %}
+                            <a href="{% url 'firm details' request.user.id %}" class="btn btn-primary"> Firm Profile</a>
+                        {% endif %}
 
+                    {% endif %}
+            </div>
 
-
-
-
-    </div>
 </div>
 {% endblock %}

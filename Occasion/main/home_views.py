@@ -1,9 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
 from django.views import generic as views
 
+from Occasion.accounts.models import UserProfile
 
-
-from Occasion.main.models import CarPhoto, Car
 
 
 class HomePageView(views.TemplateView):
@@ -11,8 +11,8 @@ class HomePageView(views.TemplateView):
 
 
 class DashboardView(views.ListView):
-    model = Car
+    model = get_user_model()
     template_name = 'dashboard.html'
-    context_object_name = 'all_cars'
+
 
 

@@ -11,13 +11,13 @@ class CreateCarView(views.CreateView):
     template_name = 'cars/create_car_profile.html'
     form_class = CreatCarProfileForm
 
-    def get_success_url(self):
-        return reverse_lazy('car details', kwargs={'pk': self.object.id}, )
-
     def get_form_kwargs(self):  # overwrite the function in FormMixin
         kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user  # пренаписваме го и добавяме user , трябва ни в CreatePetForm
+        kwargs['user'] = self.request.user  # пренаписваме го и добавяме user , трябва ни в CreateCarForm
         return kwargs
+
+    def get_success_url(self):
+        return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
 
 
 class CarDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
@@ -30,15 +30,21 @@ class CarDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
         return Car.objects.all()
 
 
-
 class EditCarView(views.UpdateView):
-    pass
+    model = Car
+    template_name = 'cars/edit_car_profile.html'
+    fields = ('price', 'km')
+
+    def get_success_url(self):
+        try:
+            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+        except:
+            return reverse_lazy('firm details', kwargs={'pk': self.request.user.id}, )
 
 
 class AllCarsView(views.ListView):
     model = Car
-    template_name = 'cars.all_cars_show.html'
-    context_object_name = 'all_cars'
+    template_name = 'cars/all_cars_show.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -48,5 +54,11 @@ class AllCarsView(views.ListView):
 
 
 class DeleteCarView(views.DeleteView):
-    pass
-# TODO form_class and template_name
+    model = Car
+    template_name = 'cars/delete_car.html'
+
+    def get_success_url(self):
+        try:
+            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+        except:
+            return reverse_lazy('firm details', kwargs={'pk': self.request.user.id}, )

@@ -4,12 +4,26 @@
     <body style="background-color:#20c997;"></body>
     <h1 class='text-center'>
         {% if car %}
-            All Car Photos
+            Advertisement Details
         {% else %}
             No car photos yet
         {% endif %}
     </h1>
+    <a href="{% url 'all cars' %}" class="btn btn-primary">All Cars</a>
+    <a href="{% url 'logout user' %}" class="btn btn-primary">Logout</a>
+    {% if not request.user.firmprofile %}
+        <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Your Profile</a>
+    {% else %}
+        <a href="{% url 'firm details' request.user.id %}" class="btn btn-primary">Your Profile</a>
+    {% endif %}
 
+    {% if object.user.userprofile.phone %}
+        <h1 class='text=end'>Owner phone number: {{ object.user.userprofile.phone }}</h1>
+        <h1 class='text=end'>Region : {{ object.user.userprofile.region }}</h1>
+    {% else %}
+        <h1 class='text=center'>Owner phone number: {{ object.user.firmprofile.phone }}</h1>
+        <h1 class='text=center'>Region : {{ object.user.firmprofile.region }}</h1>
+    {% endif %}
     {% if car %}
         <div class="container mb-5">
             <div class="row mb-5">
@@ -20,12 +34,11 @@
                              class="card-img-top" alt="Photo description">
                         <div class="card-body">
                             {#                            {% for pet in pet_photo.tagged_pets.all %}#}
-                            <h5 class="card-title">{{ car.brand }}{{ car.model }}</h5>
+                            <h5 class="card-title">{{ car.brand }}  {{ car.model }}</h5>
                             <p class="card-text">First registration : {{ car.first_reg_date }}</p>
                             <p class="card-text">Transmission : {{ car.transmission }}</p>
                             <p class="card-text">Fuel : {{ car.fuel }}</p>
                             <p class="card-text">{{ car.km }} KM</p>
-
                             <p class="card-text">Price : {{ car.price }} Euro</p>
                             {% if is_owner %}
                             <div class="navbar">

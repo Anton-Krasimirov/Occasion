@@ -24,7 +24,6 @@ class UserRegisterView(views.CreateView):
 
 
 class UserLoginView(auth_view.LoginView, ContextMixin):
-    # form_class = UserCreateForm
     template_name = 'accounts/login_user_page.html'
     success_url = reverse_lazy('dashboard')
 
@@ -38,6 +37,10 @@ class UserLoginView(auth_view.LoginView, ContextMixin):
         if self.success_url:
             return self.success_url
         return super().get_success_url()
+
+
+class UserLogoutView(auth_view.LogoutView):
+    pass
 
 
 class UserDetailView(auth_mixin.LoginRequiredMixin, views.DetailView):
@@ -63,7 +66,6 @@ class EditProfileView(views.UpdateView):
 
 
 class DeleteUserProfileView(views.DeleteView):
-    # form_class = UserDeleteForm
     model = get_user_model()
     template_name = 'accounts/delete_user.html'
     success_url = reverse_lazy('index')
