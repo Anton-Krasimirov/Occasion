@@ -8,7 +8,7 @@ from Occasion.accounts.validators import validate_only_letters
 from django.core.validators import RegexValidator
 
 
-# This is a custom user model
+# custom user model
 
 class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(unique=True, null=False, blank=False, )
@@ -16,6 +16,9 @@ class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True, )
 
     USERNAME_FIELD = 'email'
+
+    is_staff = models.BooleanField(
+        default=False,)
 
     objects = OccasionUserManager()
 
