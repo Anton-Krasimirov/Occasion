@@ -53,7 +53,7 @@ class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     region = forms.CharField(max_length=30, )
 
-    address = forms.CharField(widget=forms.Textarea(attrs={'rows': 3,}), )
+    address = forms.CharField(widget=forms.Textarea(attrs={'rows': 2,}), )
 
     phone = forms.CharField(max_length=10, required=False,)
 
@@ -81,4 +81,20 @@ class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
     class Meta:
         model = get_user_model()
         fields = ('firm_name', 'password1', 'password2', 'email', 'phone', 'region', 'address')
+        widgets = {'address': forms.Textarea(attrs={'rows': 2,},)}
 
+
+class EditUserProfileForm(auth_forms.UserCreationForm, BootstrapFormMixin):
+    pass
+
+
+class EditFirmProfileForm(auth_forms.UserCreationForm, BootstrapFormMixin):
+    pass
+
+
+class DeleteUserForm(forms.ModelForm):
+    pass
+
+
+class DeleteFirmForm(forms.ModelForm):
+    pass

@@ -2,8 +2,8 @@ from django.views import generic as views
 from django.urls import reverse_lazy
 from django.contrib.auth import mixins as auth_mixin
 
-from Occasion.main.forms import CreatCarProfileForm
-from Occasion.main.models import Car
+from Occasion.main.forms import CreatCarProfileForm, EditCarForm
+from Occasion.main.models import Car, CarPhoto
 
 
 class CreateCarView(views.CreateView):
@@ -11,9 +11,9 @@ class CreateCarView(views.CreateView):
     template_name = 'cars/create_car_profile.html'
     form_class = CreatCarProfileForm
 
-    def get_form_kwargs(self):  # overwrite the function in FormMixin
+    def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user  # пренаписваме го и добавяме user , трябва ни в CreateCarForm
+        kwargs['user'] = self.request.user
         return kwargs
 
     def get_success_url(self):
@@ -26,20 +26,24 @@ class CarDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
     template_name = 'cars/car_profile_details.html'
     context_object_name = 'car'
 
-    def get_queryset(self):
-        return Car.objects.all()
+    # def get_queryset(self):
+    #     return Car.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        photos = list(CarPhoto.objects.filter(car_id=self.object.id))
+        context['is_owner'] = self.object.user == self.request.user
+        context.update({'photos': photos, })
+        return context
 
 
 class EditCarView(views.UpdateView):
     model = Car
     template_name = 'cars/edit_car_profile.html'
-    fields = ('price', 'km')
+    form_class = EditCarForm
 
     def get_success_url(self):
-        try:
-            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
-        except:
-            return reverse_lazy('firm details', kwargs={'pk': self.request.user.id}, )
+        return reverse_lazy('car details', kwargs={'pk': self.object.id}, )
 
 
 class AllCarsView(views.ListView):

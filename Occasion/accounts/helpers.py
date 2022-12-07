@@ -1,4 +1,3 @@
-from django.shortcuts import redirect
 
 
 class BootstrapFormMixin:
@@ -12,10 +11,3 @@ class BootstrapFormMixin:
                 field.widget.attrs['class'] = ''
             field.widget.attrs['class'] += 'form-control'
 
-
-# class RedirectToDashboard:
-#     def dispatch(self, request, *args, **kwargs):
-#         if request.user.is_authenticated:
-#             return redirect('dashboard')
-#
-#         return super().dispatch(request, *args, **kwargs)

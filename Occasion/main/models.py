@@ -1,13 +1,13 @@
+import self
 from django.contrib.auth import get_user_model
 from django.db import models
 
 from Occasion.accounts.models import OccasionUser
-from Occasion.accounts.validators import MaxFileSizeInValidator
 
 UserModel = get_user_model()
 
-class Car(models.Model):
 
+class Car(models.Model):
     DIESEL = "Diesel"
     GASOLINE = "Gasoline"
     HYBRID = "Hybrid"
@@ -31,39 +31,40 @@ class Car(models.Model):
 
     TYPES_FUEL = [(x, x) for x in (DIESEL, GASOLINE, HYBRID, ELECTRIC,)]
 
-    brand = models.CharField(max_length=15, null=False, blank=False,)
+    brand = models.CharField(max_length=15, null=False, blank=False, )
 
-    model = models.CharField(max_length=15, null=False, blank=False,)
+    model = models.CharField(max_length=15, null=False, blank=False, )
 
-    body_style = models.CharField(max_length=max(len(x) for (x, _) in BODY_STYLES), choices=BODY_STYLES, null=True, blank=True,)
+    body_style = models.CharField(max_length=max(len(x) for (x, _) in BODY_STYLES), choices=BODY_STYLES, null=True,
+                                  blank=True, )
 
-    km = models.CharField(max_length=15, null=False, blank=False,)# TODO fix the field
+    km = models.CharField(max_length=15, null=False, blank=False, )  # TODO fix the field
 
-    first_reg_date = models.DateField(null=False, blank=False,)
+    first_reg_date = models.DateField(null=False, blank=False, )
 
-    transmission = models.CharField(max_length=max(len(x) for (x, _) in TYPE_TRANSMISSION), choices=TYPE_TRANSMISSION,)
+    transmission = models.CharField(max_length=max(len(x) for (x, _) in TYPE_TRANSMISSION), choices=TYPE_TRANSMISSION, )
 
-    fuel = models.CharField(max_length=max(len(x) for (x, _) in TYPES_FUEL), choices=TYPES_FUEL,)
+    fuel = models.CharField(max_length=max(len(x) for (x, _) in TYPES_FUEL), choices=TYPES_FUEL, )
 
-    color = models.CharField(max_length=15,)
+    color = models.CharField(max_length=15, )
 
-    price = models.CharField(max_length=15, null=False, blank=False,)
+    price = models.CharField(max_length=15, null=False, blank=False, )
 
-    photo = models.URLField(null=False, blank=False,)
+    photo = models.URLField(null=False, blank=False, )
 
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE,)# TODO prowero relaciqta
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, )
 
     def __str__(self):
         return f'{self.brand} {self.model}'
 
 
 class CarPhoto(models.Model):
-    photo = models.URLField()
+    photo = models.URLField(help_text='The photo must not be duplicated !')
 
-    # photo = models.ImageField(validators=(
-    #     MaxFileSizeInValidator,
-    # ),)
+    description = models.CharField(max_length=150, null=True, blank=True, )
 
-    description = models.CharField(max_length=150, null=True, blank=True,)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, )
 
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE,)# TODO prowero relaciqta
+
+
+

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth import models as auth_models, get_user_model
+from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import User
 
 
@@ -7,8 +7,6 @@ from Occasion.accounts.managers import OccasionUserManager
 from Occasion.accounts.validators import validate_only_letters
 from django.core.validators import RegexValidator
 
-
-# custom user model
 
 class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(unique=True, null=False, blank=False, )

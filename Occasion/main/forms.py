@@ -1,11 +1,10 @@
 from Occasion.accounts.helpers import BootstrapFormMixin
 from django import forms
 
-from Occasion.main.models import Car
+from Occasion.main.models import Car, CarPhoto
 
 
 class CreatCarProfileForm(forms.ModelForm, BootstrapFormMixin):
-
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
@@ -29,4 +28,34 @@ class CreatCarProfileForm(forms.ModelForm, BootstrapFormMixin):
             'km': forms.TextInput(attrs={'placeholder': 'Fill in format - 100 000',}),
             'price': forms.TextInput(attrs={'placeholder': 'fill in format - 10 000',}),
         }
+
+
+class EditCarForm(BootstrapFormMixin, forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
+
+    class Meta:
+        model = Car
+        fields = ('km', 'price', 'photo', 'first_reg_date',)
+
+
+class DeleteCarForm(forms.ModelForm):
+    pass
+
+
+class CreatCarPhotoForm(BootstrapFormMixin, forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
+
+    class Meta:
+        model = CarPhoto
+        fields = '__all__'
+
+
+
+class DeleteCarPhotoForm(forms.ModelForm):
+    pass
+
 

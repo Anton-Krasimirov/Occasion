@@ -8,6 +8,7 @@
     {% else %}
         <h1 class='text-center'>If you want to see additional information, you should be Logged<a href="{% url 'login user' %}" class="btn btn-lg btn-secondary"><strong>User Login</strong></a></h1>
     {% endif %}
+    <a class="btn btn-secondary btn-sm" href="javascript:history.back()"><strong>Back</strong></a>
         {% if user_cars %}
             {% for car in user_cars %}
                 <div class="container">
@@ -26,7 +27,6 @@
                                     <div class="navbar">
                                         <a href="{% url 'car details' car.pk %}"
                                            class="btn btn-lg btn-secondary">Car`s detail</a>
-{#                                        <a href="#" class="btn btn-lg btn-secondary">Edit</a>#}
                                     </div>
                                     {% endif %}
                                 </div>
@@ -34,9 +34,11 @@
                         </div>
                     </div>
                 </div>
-                </div>
+
             {% endfor %}
-    {% endif %}
+        {% else %}
+            <h1 class='text-center'>Not cars yet</h1>
+        {% endif %}
 
 
 {% endblock %}
