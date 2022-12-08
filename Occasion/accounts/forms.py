@@ -37,12 +37,10 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
             profile.save()
         return user
 
-    class Meta:  # TODO fix the widget fields , Enter your phone nomber
+    class Meta:
         model = get_user_model()
         fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'phone', 'region')
-        widgets = {
-            'phone': forms.NumberInput(attrs={'placeholder': 'Enter your phone number', })
-        }
+
 
 
 class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):

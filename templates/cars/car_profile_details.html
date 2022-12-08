@@ -66,8 +66,7 @@
                             <h5 class="card-title">{{ photo.description }}</h5>
                             {% if is_owner %}
                             <div class="navbar">
-                                <a href="#" class="btn btn-secondary btn-sm">Edit</a>
-                                <a href="#" class="btn btn-secondary btn-sm">Delete</a>
+                                <a href="{% url 'delete photo' photo.id %}" class="btn btn-secondary btn-sm">Delete</a>
                             </div>
                             {% endif %}
                         </div>

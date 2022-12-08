@@ -15,7 +15,7 @@ class UserRegisterView(views.CreateView):
     template_name = 'accounts/create_profile.html'
     success_url = reverse_lazy('dashboard')
 
-    def form_valid(self, form):  # TODO за да не иска логин след регистрацията
+    def form_valid(self, form):
         result = super().form_valid(form)
         login(self.request, self.object)
         return result
@@ -68,6 +68,3 @@ class DeleteUserProfileView(views.DeleteView):
     template_name = 'accounts/delete_user.html'
     success_url = reverse_lazy('index')
 
-
-class ChangeUserPasswordView(auth_view.PasswordChangeView):
-    pass

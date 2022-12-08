@@ -16,5 +16,5 @@ urlpatterns = (
     path('car/delete/<int:pk>/', DeleteCarView.as_view(), name='delete car'),
 
     path('car/photo/create/', CreateCarPhotoView.as_view(), name='photo create'),
-    path('car/photo/delete/', DeleteCarPhotoView.as_view(), name='delete photo'),
+    path('car/photo/delete/<int:pk>/', DeleteCarPhotoView.as_view(), name='delete photo'),
 )
