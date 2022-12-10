@@ -34,6 +34,7 @@ class UserProfile(models.Model):
 
     region = models.CharField(max_length=30, null=False, blank=False, )
 
+
     user = models.OneToOneField(
         OccasionUser,
         on_delete=models.CASCADE,

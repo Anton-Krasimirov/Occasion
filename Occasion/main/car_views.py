@@ -17,7 +17,12 @@ class CreateCarView(views.CreateView):
         return kwargs
 
     def get_success_url(self):
-        return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+        # return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+
+        try:
+            return reverse_lazy('firm details', kwargs={'pk': self.request.user.firmprofile.user_id}, )
+        except:
+            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
 
 
 class CarDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
@@ -63,6 +68,6 @@ class DeleteCarView(views.DeleteView):
 
     def get_success_url(self):
         try:
-            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+            return reverse_lazy('firm details', kwargs={'pk': self.request.user.firmprofile.user_id}, )
         except:
-            return reverse_lazy('firm details', kwargs={'pk': self.request.user.id}, )
+            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )

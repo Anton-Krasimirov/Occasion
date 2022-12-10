@@ -45,13 +45,22 @@ class DeleteCarForm(forms.ModelForm):
 
 
 class CreatCarPhotoForm(BootstrapFormMixin, forms.ModelForm):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):#TODO add car ant row self.car = car
         super().__init__(*args, **kwargs)
         self._init_bootstrap_form_controls()
+
+    # def save(self, commit=True):
+    #     photo = super().save(commit=False)
+    #
+    #     photo.car = self.car
+    #     if commit:
+    #         photo.save()
+    #     return photo
 
     class Meta:
         model = CarPhoto
         fields = '__all__'
+        # fields = ('photo', 'description')
 
 
 

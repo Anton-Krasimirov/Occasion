@@ -7,6 +7,10 @@ from Occasion.accounts.models import UserProfile, FirmProfile
 
 
 class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
+
     first_name = forms.CharField(max_length=30, )
 
     last_name = forms.CharField(max_length=30, )
@@ -17,9 +21,7 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     region = forms.CharField(max_length=30, required=False)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._init_bootstrap_form_controls()
+
 
     def save(self, commit=True):
         user = super().save(commit=commit)
@@ -39,7 +41,10 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     class Meta:
         model = get_user_model()
+        # model = UserProfile
         fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'phone', 'region')
+        # fields = '__all__'
+
 
 
 

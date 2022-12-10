@@ -1,8 +1,7 @@
-import self
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from Occasion.accounts.models import OccasionUser
+# from Occasion.accounts.models import OccasionUser
 
 UserModel = get_user_model()
 

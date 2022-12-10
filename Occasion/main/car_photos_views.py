@@ -13,13 +13,23 @@ class CreateCarPhotoView(auth_mixin.LoginRequiredMixin, views.CreateView):
     template_name = 'cars/photo_create.html'
     form_class = CreatCarPhotoForm
 
-    def get_success_url(self):
-        return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs['car'] = self.request.user....
+    #     return kwargs
 
+    def get_success_url(self):
+        try:
+            return reverse_lazy('firm details', kwargs={'pk': self.request.user.firmprofile.user_id}, )
+        except:
+            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
 
 class DeleteCarPhotoView(views.DeleteView):
     model = CarPhoto
     template_name = 'cars/delete_photo.html'
 
     def get_success_url(self):
-        return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+        try:
+            return reverse_lazy('firm details', kwargs={'pk': self.request.user.firmprofile.user_id}, )
+        except:
+            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
