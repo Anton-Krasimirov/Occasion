@@ -56,13 +56,13 @@ class Car(models.Model):
     def __str__(self):
         return f'{self.brand} {self.model}'
 
-
-class CarPhoto(models.Model):
-    photo = models.URLField(help_text='The photo must not be duplicated !')
-
-    description = models.CharField(max_length=150, null=True, blank=True, )
-
-    car = models.ForeignKey(Car, on_delete=models.CASCADE, )
+#
+# class CarPhoto(models.Model):
+#     photo = models.URLField(help_text='The photo must not be duplicated !')
+#
+#     description = models.CharField(max_length=150, null=True, blank=True, )
+#
+#     car = models.ForeignKey(Car, on_delete=models.CASCADE, )
 
 
 

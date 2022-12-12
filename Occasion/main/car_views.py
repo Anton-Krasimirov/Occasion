@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import mixins as auth_mixin
 
 from Occasion.main.forms import CreatCarProfileForm, EditCarForm
-from Occasion.main.models import Car, CarPhoto
+from Occasion.main.models import Car
 
 
 class CreateCarView(views.CreateView):
@@ -17,8 +17,6 @@ class CreateCarView(views.CreateView):
         return kwargs
 
     def get_success_url(self):
-        # return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
-
         try:
             return reverse_lazy('firm details', kwargs={'pk': self.request.user.firmprofile.user_id}, )
         except:
@@ -36,9 +34,7 @@ class CarDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        photos = list(CarPhoto.objects.filter(car_id=self.object.id))
         context['is_owner'] = self.object.user == self.request.user
-        context.update({'photos': photos, })
         return context
 
 

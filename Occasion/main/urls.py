@@ -2,7 +2,7 @@
 
 from django.urls import path
 
-from Occasion.main.car_photos_views import CreateCarPhotoView, DeleteCarPhotoView
+
 from Occasion.main.car_views import CreateCarView, CarDetailsView, AllCarsView, EditCarView, DeleteCarView
 from Occasion.main.home_views import HomePageView, DashboardView
 
@@ -15,6 +15,5 @@ urlpatterns = (
     path('car/all_cars/', AllCarsView.as_view(), name='all cars'),
     path('car/delete/<int:pk>/', DeleteCarView.as_view(), name='delete car'),
 
-    path('car/photo/create/', CreateCarPhotoView.as_view(), name='photo create'),
-    path('car/photo/delete/<int:pk>/', DeleteCarPhotoView.as_view(), name='delete photo'),
+
 )
