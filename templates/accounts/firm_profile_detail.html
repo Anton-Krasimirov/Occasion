@@ -92,6 +92,34 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+                {% if motors %}
+                    <div class="row mb-5">
+                        {% for motor in motors %}
+                            <div class="col-sm-6">
+                                <div class="card ml-3 mb-3" style="width: 15rem;">
+                                    <img src="{{ motor.photo }}"
+                                         class="card-img-top" alt="Photo description">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ motor.brand }} {{ motor.model }}</h5>
+                                        <p class="card-text">First registration : {{ motor.first_reg_date }}</p>
+                                        <p class="card-text">{{ motor.transmission }}</p>
+                                        <p class="card-text">{{ motor.fuel }}</p>
+                                        <p class="card-text">{{ motor.kilometers }} KM</p>
+                                        <p class="card-text">Price : {{ motor.price }} Euro</p>
+                                        <div class="navbar">
+                                            <a href="{% url 'motor details' motor.pk %}"
+                                               class="btn btn-secondary btn-sm">Seе</a>
+                                            <a href="{% url 'edit motor' motor.pk %}"
+                                               class="btn btn-secondary btn-sm">Edit</a>
+                                            <a href="{% url 'delete motor' motor.pk %}"
+                                               class="btn btn-secondary btn-sm">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

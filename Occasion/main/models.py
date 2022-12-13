@@ -109,3 +109,48 @@ class Truck(models.Model):
 
     def __str__(self):
         return f'{self.brand} {self.model}'
+
+
+class Motorbike(models.Model):
+    DIESEL = "Diesel"
+    PETROL = "Petrol"
+    ELECTRIC = "Electric"
+    OTHER = "Other"
+
+    MANUAL = 'Manual'
+    AUTOMATIC = 'Automatic'
+
+    NAKED_BIKE = "Naked Bike"
+    SCOOTER = "Scooter"
+    CHOPPER = "Chopper"
+    MOTORCYCLE = "Motorcycle"
+    ENDURO = "Enduro"
+
+    TYPE_TRANSMISSION = [(x, x) for x in (MANUAL, AUTOMATIC,)]
+    CATEGORY = [(x, x) for x in (NAKED_BIKE, SCOOTER, CHOPPER, MOTORCYCLE, ENDURO,)]
+    TYPES_FUEL = [(x, x) for x in (DIESEL, PETROL, ELECTRIC, OTHER)]
+
+    brand = models.CharField(max_length=15, null=False, blank=False, )
+
+    model = models.CharField(max_length=15, null=False, blank=False, )
+
+    type = models.CharField(max_length=max(len(x) for (x, _) in CATEGORY), choices=CATEGORY, null=True,
+                            blank=True, )
+    fuel = models.CharField(max_length=max(len(x) for (x, _) in TYPES_FUEL), choices=TYPES_FUEL, )
+
+    price = models.CharField(max_length=15, null=False, blank=False, )
+
+    first_reg_date = models.DateField(null=False, blank=False, )
+
+    kilometers = models.CharField(max_length=15, null=False, blank=False, )
+
+    photo = models.URLField(null=False, blank=False, )
+
+    photo2 = models.URLField(null=True, blank=True, )
+
+    photo3 = models.URLField(null=True, blank=True, )
+
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, )
+
+    def __str__(self):
+        return f'{self.brand} {self.model}'

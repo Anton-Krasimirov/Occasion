@@ -2,14 +2,14 @@ from django.views import generic as views
 from django.urls import reverse_lazy
 from django.contrib.auth import mixins as auth_mixin
 
-from Occasion.main.forms import CreatCarProfileForm, EditCarForm
-from Occasion.main.models import Car
+from Occasion.main.forms import CreatMotorProfileForm, EditMotorForm
+from Occasion.main.models import Motorbike
 
 
-class CreateCarView(views.CreateView):
-    model = Car
-    template_name = 'cars/create_car_profile.html'
-    form_class = CreatCarProfileForm
+class CreateMotorView(views.CreateView):
+    model = Motorbike
+    template_name = 'cars/create_motor_profile.html'
+    form_class = CreatMotorProfileForm
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -23,11 +23,11 @@ class CreateCarView(views.CreateView):
             return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
 
 
-class CarDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
-    form_class = CreatCarProfileForm
-    model = Car
-    template_name = 'cars/car_profile_details.html'
-    context_object_name = 'car'
+class MotorDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
+    form_class = CreatMotorProfileForm
+    model = Motorbike
+    template_name = 'cars/motor_profile_details.html'
+    context_object_name = 'motor'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -35,29 +35,29 @@ class CarDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
         return context
 
 
-class EditCarView(views.UpdateView):
-    model = Car
-    template_name = 'cars/edit_car_profile.html'
-    form_class = EditCarForm
+class EditMotorView(views.UpdateView):
+    model = Motorbike
+    template_name = 'cars/edit_motor_profile.html'
+    form_class = EditMotorForm
 
     def get_success_url(self):
-        return reverse_lazy('car details', kwargs={'pk': self.object.id}, )
+        return reverse_lazy('motor details', kwargs={'pk': self.object.id}, )
 
 
-class AllCarsView(views.ListView):
-    model = Car
-    template_name = 'cars/all_cars_show.html'
+class AllMotorsView(views.ListView):
+    model = Motorbike
+    template_name = 'cars/all_motors_show.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_cars = context['object_list']
-        context.update({'user_cars': user_cars, })
+        user_motors = context['object_list']
+        context.update({'user_motors': user_motors, })
         return context
 
 
-class DeleteCarView(views.DeleteView):
-    model = Car
-    template_name = 'cars/delete_car.html'
+class DeleteMotorView(views.DeleteView):
+    model = Motorbike
+    template_name = 'cars/delete_motor.html'
 
     def get_success_url(self):
         try:

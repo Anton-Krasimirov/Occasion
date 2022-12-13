@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views, get_user_model, login
 
 from Occasion.accounts.forms import FirmProfileCreateForm
 from Occasion.accounts.models import FirmProfile
-from Occasion.main.models import Car, Truck
+from Occasion.main.models import Car, Truck, Motorbike
 
 
 class FirmRegisterView(views.CreateView):
@@ -30,7 +30,8 @@ class FirmDetailView(views.DetailView):
         context = super().get_context_data(**kwargs)
         cars = list(Car.objects.filter(user_id=self.object.user_id))
         trucks = list(Truck.objects.filter(user_id=self.object.user_id))
-        context.update({'cars': cars, 'trucks': trucks})
+        motors = list(Motorbike.objects.filter(user_id=self.object.user_id))
+        context.update({'cars': cars, 'trucks': trucks, 'motors': motors,})
 
         return context
 

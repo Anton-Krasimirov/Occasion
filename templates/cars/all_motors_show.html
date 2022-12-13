@@ -9,28 +9,29 @@
         <h1 class='text-center'>If you want to see additional information you should be Logged<a href="{% url 'login user' %}" class="btn btn-lg btn-secondary"><strong>User Login</strong></a></h1>
     {% endif %}
     <a class="btn btn-lg btn-secondary" href="javascript:history.back()"><strong>Back</strong></a>
-    <a href="{% url 'create car' %}" class="btn btn-lg btn-secondary"><strong>Add Car</strong></a>
+    <a href="{% url 'create motor' %}" class="btn btn-lg btn-secondary"><strong>Add Motor</strong></a>
+    <a href="{% url 'all cars' %}" class="btn btn-lg btn-secondary"><strong>All Cars</strong></a>
     <a href="{% url 'all trucks' %}" class="btn btn-lg btn-secondary"><strong>All Trucks</strong></a>
-    <a href="{% url 'all motors' %}" class="btn btn-lg btn-secondary"><strong>All Motors</strong></a>
-        {% if user_cars %}
+
+        {% if user_motors %}
             <div class="row">
-            {% for car in user_cars %}
+            {% for motor in user_motors %}
 {#                <div class="container">#}
 
                         <div class="col">
                             <div class="card ml-3 mb-3" style="width: 12rem;">
-                                <img src="{{ car.photo }}"
+                                <img src="{{ motor.photo }}"
                                      class="card-img-top" alt="Photo description">
                                 <div class="card-body">
 
-                                    <h5 class="card-title">{{ car.brand }}{{ car.model }}</h5>
-                                    <p class="card-text">First registration : {{ car.first_reg_date }}</p>
-                                    <p class="card-text">{{ car.transmission }}</p>
-                                    <p class="card-text">{{ car.fuel }}</p>
+                                    <h5 class="card-title">{{ motor.brand }}{{ motor.model }}</h5>
+                                    <p class="card-text">First registration : {{ motor.first_reg_date }}</p>
+                                    <p class="card-text">{{ motor.transmission }}</p>
+                                    <p class="card-text">{{ motor.fuel }}</p>
                                     {% if request.user.is_authenticated %}
                                     <div class="navbar">
-                                        <a href="{% url 'car details' car.pk %}"
-                                           class="btn btn-lg btn-secondary">Car`s detail</a>
+                                        <a href="{% url 'motor details' motor.pk %}"
+                                           class="btn btn-lg btn-secondary">Motor`s detail</a>
                                     </div>
                                     {% endif %}
                                 </div>
@@ -42,7 +43,7 @@
             </div>
 
         {% else %}
-            <h1 class='text-center'>Not cars yet</h1>
+            <h1 class='text-center'>Not motors yet</h1>
         {% endif %}
 
 

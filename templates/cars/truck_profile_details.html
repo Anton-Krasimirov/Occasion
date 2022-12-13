@@ -11,6 +11,7 @@
     </h1>
     <a href="{% url 'all trucks' %}" class="btn btn-primary">All Trucks</a>
     <a href="{% url 'all cars' %}" class="btn btn-primary">All Cars</a>
+    <a href="{% url 'all motors' %}" class="btn btn-primary">All Motors</a>
     <a href="{% url 'logout user' %}" class="btn btn-primary">Logout</a>
     {% if not request.user.firmprofile %}
         <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Your Profile</a>

@@ -3,10 +3,10 @@
 {% block page_content %}
     <body style="background-color:#20c997;"></body>
     <h1 class='text-center'>
-        {% if car %}
+        {% if motor %}
             Advertisement Details
         {% else %}
-            No car photos yet
+            No motor photos yet
         {% endif %}
     </h1>
     <a href="{% url 'all cars' %}" class="btn btn-primary">All Cars</a>
@@ -26,26 +26,26 @@
         <h1 class='text=center'>Owner phone number: {{ object.user.firmprofile.phone }}</h1>
         <h1 class='text=center'>Region : {{ object.user.firmprofile.region }}</h1>
     {% endif %}
-    {% if car %}
+    {% if motor %}
 {#        <div class="container mb-5">#}
             <div class="row mb-5">
                 <div class="col-sm-6">
                     <div class="card ml-3 mb-3" style="width: 15rem;">
                         <!-- Image -->
-                        <img src="{{ car.photo }}"
+                        <img src="{{ motor.photo }}"
                              class="card-img-top" alt="Photo description">
                         <div class="card-body">
 
-                            <h5 class="card-title">{{ car.brand }}  {{ car.model }}</h5>
-                            <p class="card-text">First registration : {{ car.first_reg_date }}</p>
-                            <p class="card-text">Transmission : {{ car.transmission }}</p>
-                            <p class="card-text">Fuel : {{ car.fuel }}</p>
-                            <p class="card-text">{{ car.km }} KM</p>
-                            <p class="card-text">Price : {{ car.price }} Euro</p>
+                            <h5 class="card-title">{{ motor.brand }}  {{ motor.model }}</h5>
+                            <p class="card-text">First registration : {{ motor.first_reg_date }}</p>
+                            <p class="card-text">Transmission : {{ motor.transmission }}</p>
+                            <p class="card-text">Fuel : {{ motor.fuel }}</p>
+                            <p class="card-text">{{ motor.km }} KM</p>
+                            <p class="card-text">Price : {{ motor.price }} Euro</p>
                             {% if is_owner %}
                             <div class="navbar">
-                                <a href="{% url 'edit car' car.id %}" class="btn btn-secondary btn-sm">Edit</a>
-                                <a href="{% url 'delete car' car.id %}" class="btn btn-secondary btn-sm">Delete</a>
+                                <a href="{% url 'edit motor' motor.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                                <a href="{% url 'delete motor' motor.id %}" class="btn btn-secondary btn-sm">Delete</a>
                             </div>
                             {% endif %}
                         </div>
@@ -54,8 +54,8 @@
                 <div class="col-sm-6">
                     <div class="card ml-3 mb-3" style="width: 15rem;">
                             <div>
-                                {% if car.photo2 %}
-                                    <img src="{{ car.photo2 }}" alt="HTML5 Icon" style="width:328px;height:228px;">
+                                {% if motor.photo2 %}
+                                    <img src="{{ motor.photo2 }}" alt="HTML5 Icon" style="width:328px;height:228px;">
                                 {% endif %}
 
                             </div>
@@ -63,8 +63,8 @@
                 <div class="col-sm-6">
                     <div class="card ml-3 mb-3" style="width: 15rem;">
                         <div>
-                            {% if car.photo3 %}
-                                <img src="{{ car.photo3 }}" alt="HTML5 Icon" style="width:328px;height:228px;">
+                            {% if motor.photo3 %}
+                                <img src="{{ motor.photo3 }}" alt="HTML5 Icon" style="width:328px;height:228px;">
                             {% endif %}
 
                         </div>

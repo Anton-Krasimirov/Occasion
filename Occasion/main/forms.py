@@ -1,7 +1,7 @@
 from Occasion.accounts.helpers import BootstrapFormMixin
 from django import forms
 
-from Occasion.main.models import Car, Truck
+from Occasion.main.models import Car, Truck, Motorbike
 
 
 class CreatCarProfileForm(forms.ModelForm, BootstrapFormMixin):
@@ -87,3 +87,43 @@ class EditTruckForm(BootstrapFormMixin, forms.ModelForm):
 class DeleteTruckForm(forms.ModelForm):
     pass
 
+
+class CreatMotorProfileForm(forms.ModelForm, BootstrapFormMixin):
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = user
+        self._init_bootstrap_form_controls()
+
+    def save(self, commit=True):
+        motor = super().save(commit=False)
+
+        motor.user = self.user
+        if commit:
+            motor.save()
+        return motor
+
+    class Meta:
+        model = Motorbike
+        fields = (
+            'brand', 'model', 'type', 'fuel', 'price', 'first_reg_date', 'kilometers', 'photo', 'photo2', 'photo3')
+        widgets = {
+            'first_reg_date': forms.TextInput(
+                attrs={'placeholder': 'Fill in this format - mm/dd/year', }
+            ),
+            'kilometers': forms.TextInput(attrs={'placeholder': 'Fill in format - 100 000', }),
+            'price': forms.TextInput(attrs={'placeholder': 'fill in format - 10 000', }),
+        }
+
+
+class EditMotorForm(BootstrapFormMixin, forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
+
+    class Meta:
+        model = Motorbike
+        fields = ('kilometers', 'price', 'photo', 'photo2', 'photo3')
+
+
+class DeleteMotorForm(forms.ModelForm):
+    pass

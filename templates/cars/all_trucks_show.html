@@ -8,7 +8,10 @@
     {% else %}
         <h1 class='text-center'>If you want to see additional information you should be Logged<a href="{% url 'login user' %}" class="btn btn-lg btn-secondary"><strong>User Login</strong></a></h1>
     {% endif %}
-    <a class="btn btn-secondary btn-sm" href="javascript:history.back()"><strong>Back</strong></a>
+    <a class="btn btn-lg btn-secondary" href="javascript:history.back()"><strong>Back</strong></a>
+    <a href="{% url 'create truck' %}" class="btn btn-lg btn-secondary"><strong>Add Truck</strong></a>
+    <a href="{% url 'all cars' %}" class="btn btn-lg btn-secondary"><strong>All Cars</strong></a>
+    <a href="{% url 'all motors' %}" class="btn btn-lg btn-secondary"><strong>All Motors</strong></a>
         {% if user_truck %}
             <div class="row">
             {% for truck in user_truck %}
