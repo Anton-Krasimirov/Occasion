@@ -9,37 +9,37 @@
         <h1 class='text-center'>If you want to see additional information you should be Logged<a href="{% url 'login user' %}" class="btn btn-lg btn-secondary"><strong>User Login</strong></a></h1>
     {% endif %}
     <a class="btn btn-secondary btn-sm" href="javascript:history.back()"><strong>Back</strong></a>
-        {% if user_cars %}
+        {% if user_truck %}
             <div class="row">
-            {% for car in user_cars %}
+            {% for truck in user_truck %}
 {#                <div class="container">#}
 
                         <div class="col">
                             <div class="card ml-3 mb-3" style="width: 12rem;">
-                                <img src="{{ car.photo }}"
+                                <img src="{{ truck.photo }}"
                                      class="card-img-top" alt="Photo description">
                                 <div class="card-body">
 
-                                    <h5 class="card-title">{{ car.brand }}{{ car.model }}</h5>
-                                    <p class="card-text">First registration : {{ car.first_reg_date }}</p>
-                                    <p class="card-text">{{ car.transmission }}</p>
-                                    <p class="card-text">{{ car.fuel }}</p>
+                                    <h5 class="card-title">{{ truck.brand }}{{ truck.model }}</h5>
+                                    <p class="card-text">First registration : {{ truck.first_reg_date }}</p>
+                                    <p class="card-text">{{ truck.transmission }}</p>
+                                    <p class="card-text">{{ truck.fuel }}</p>
                                     {% if request.user.is_authenticated %}
                                     <div class="navbar">
-                                        <a href="{% url 'car details' car.pk %}"
-                                           class="btn btn-lg btn-secondary">Car`s detail</a>
+                                        <a href="{% url 'truck details' truck.pk %}"
+                                           class="btn btn-lg btn-secondary">Truck`s detail</a>
                                     </div>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
+
 {#                </div>#}
 
             {% endfor %}
             </div>
-
         {% else %}
-            <h1 class='text-center'>Not cars yet</h1>
+            <h1 class='text-center'>Not trucks yet</h1>
         {% endif %}
 
 

@@ -7,7 +7,7 @@ from django.views.generic.base import ContextMixin
 
 from Occasion.accounts.forms import UserCreateForm
 from Occasion.accounts.models import UserProfile
-from Occasion.main.models import Car
+from Occasion.main.models import Car, Truck
 
 
 class UserRegisterView(views.CreateView):
@@ -49,7 +49,8 @@ class UserDetailView(auth_mixin.LoginRequiredMixin, views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         cars = list(Car.objects.filter(user_id=self.object.user_id))
-        context.update({'cars': cars, })
+        trucks = list(Truck.objects.filter(user_id=self.object.user_id))
+        context.update({'cars': cars, 'trucks': trucks,})
 
         return context
 

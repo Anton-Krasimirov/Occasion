@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% block page_content %}
 
@@ -42,7 +41,8 @@
                     <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-sm">Dashboard</a>
                     <a href="{% url 'edit user' profile.pk %}" class="btn btn-secondary btn-sm">Edit profile</a>
                     <a href="{% url 'delete user' profile.pk %}" class="btn btn-secondary btn-sm">Delete profile</a>
-                    <a href="{% url 'create car' %}" class="btn btn-secondary btn-sm">Add Advertisement</a>
+                    <a href="{% url 'create car' %}" class="btn btn-secondary btn-sm">Add Car Advertisement</a>
+                    <a href="{% url 'create truck' %}" class="btn btn-secondary btn-sm">Add Truck Advisement</a>
                     <a href="{% url 'logout user' %}" class="btn btn-secondary btn-sm">Logout</a>
                     <a class="btn btn-secondary btn-sm" href="javascript:history.back()">Back</a>
                 </div>
@@ -50,36 +50,64 @@
         </div>
 
         {% if cars %}
-            {% for car in cars %}
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card ml-3 mb-3" style="width: 12rem;">
-                                <img src="{{ car.photo }}"
-                                     class="card-img-top" alt="Photo description">
-                                <div class="card-body">
+            <div class="row mb-5">
+                {% for car in cars %}
+                    {#                <div class="container">#}
+                    <div class="col-sm-6">
+                        <div class="card ml-3 mb-3" style="width: 12rem;">
+                            <img src="{{ car.photo }}"
+                                 class="card-img-top" alt="Photo description">
+                            <div class="card-body">
 
-                                    <h5 class="card-title">{{ car.brand }}  {{ car.model }}</h5>
-                                    <p class="card-text">First registration : {{ car.first_reg_date }}</p>
-                                    <p class="card-text">{{ car.transmission }}</p>
-                                    <p class="card-text">{{ car.fuel }}</p>
-                                    <p class="card-text">{{ car.km }} KM</p>
-                                    <p class="card-text">Price : {{ car.price }} Euro</p>
-                                    <div class="navbar">
-                                        <a href="{% url 'car details' car.pk %}"
-                                           class="btn btn-secondary btn-sm">Seе</a>
-                                        <a href="{% url 'edit car' car.pk %}"
-                                           class="btn btn-secondary btn-sm">Edit</a>
-                                        <a href="{% url 'delete car' car.pk %}"
-                                           class="btn btn-secondary btn-sm">Delete</a>
-                                    </div>
+                                <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                                <p class="card-text">First registration : {{ car.first_reg_date }}</p>
+                                <p class="card-text">{{ car.transmission }}</p>
+                                <p class="card-text">{{ car.fuel }}</p>
+                                <p class="card-text">{{ car.km }} KM</p>
+                                <p class="card-text">Price : {{ car.price }} Euro</p>
+                                <div class="navbar">
+                                    <a href="{% url 'car details' car.pk %}"
+                                       class="btn btn-secondary btn-sm">Seе</a>
+                                    <a href="{% url 'edit car' car.pk %}"
+                                       class="btn btn-secondary btn-sm">Edit</a>
+                                    <a href="{% url 'delete car' car.pk %}"
+                                       class="btn btn-secondary btn-sm">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                        {#                        </div>#}
+                    </div>
+                    {#                </div>#}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if trucks %}
+            <div class="row mb-5">
+                {% for truck in trucks %}
+                    <div class="col-sm-6">
+                        <div class="card ml-3 mb-3" style="width: 15rem;">
+                            <img src="{{ truck.photo }}"
+                                 class="card-img-top" alt="Photo description">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ truck.brand }} {{ truck.model }}</h5>
+                                <p class="card-text">First registration : {{ truck.first_reg_date }}</p>
+                                <p class="card-text">{{ truck.transmission }}</p>
+                                <p class="card-text">{{ truck.fuel }}</p>
+                                <p class="card-text">{{ truck.kilometers }} KM</p>
+                                <p class="card-text">Price : {{ truck.price }} Euro</p>
+                                <div class="navbar">
+                                    <a href="{% url 'truck details' truck.pk %}"
+                                       class="btn btn-secondary btn-sm">Seе</a>
+                                    <a href="{% url 'edit truck' truck.pk %}"
+                                       class="btn btn-secondary btn-sm">Edit</a>
+                                    <a href="{% url 'delete truck' truck.pk %}"
+                                       class="btn btn-secondary btn-sm">Delete</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         {% endif %}
-
+    </div>
 {% endblock %}

@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="d-flex">
             <div class="d-inline p-2 w-50">
-                <h1><u>{{ profile.firm_name}} Firm Profile</u></h1>
+                <h1><u>{{ profile.firm_name }} Firm Profile</u></h1>
             </div>
             <div class="d-inline p-2 w-50">
 
@@ -28,37 +28,70 @@
                 <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-sm">Dashboard</a>
                 <a href="{% url 'edit firm' user.pk %}" class="btn btn-secondary btn-sm">Edit profile</a>
                 <a href="{% url 'firm delete' user.pk %}" class="btn btn-secondary btn-sm">Delete profile</a>
-                <a href="{% url 'create car' %}" class="btn btn-secondary btn-sm">Add Advisement</a>
+                <a href="{% url 'create car' %}" class="btn btn-secondary btn-sm">Add Car Advisement</a>
+                <a href="{% url 'create truck' %}" class="btn btn-secondary btn-sm">Add Truck Advisement</a>
                 <a href="{% url 'logout user' %}" class="btn btn-secondary btn-sm">Logout</a>
-        {% if cars %}
-            {% for car in cars %}
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card ml-3 mb-3" style="width: 12rem;">
-                                <img src="{{ car.photo }}"
-                                     class="card-img-top" alt="Photo description">
-                                <div class="card-body">
+                <a class="btn btn-secondary btn-sm" href="javascript:history.back()">Back</a>
+                {% if cars %}
+                    <div class="row mb-5">
+                        {% for car in cars %}
+                            {#                <div class="container">#}
+                            <div class="col-sm-6">
+                                <div class="card ml-3 mb-3" style="width: 12rem;">
+                                    <img src="{{ car.photo }}"
+                                         class="card-img-top" alt="Photo description">
+                                    <div class="card-body">
 
-                                    <h5 class="card-title">{{ car.brand }}{{ car.model }}</h5>
-                                    <p class="card-text">First registration : {{ car.first_reg_date }}</p>
-                                    <p class="card-text">{{ car.transmission }}</p>
-                                    <p class="card-text">{{ car.fuel }}</p>
-                                    <p class="card-text">{{ car.km }} KM</p>
-                                    <p class="card-text">Price : {{ car.price }} Euro</p>
-                                    <div class="navbar">
-                                        <a href="{% url 'car details' car.pk %}"
-                                           class="btn btn-lg btn-secondary">Seе</a>
-                                        <a href="{% url 'edit car' car.pk %}" class="btn btn-lg btn-secondary">Edit</a>
+                                        <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                                        <p class="card-text">First registration : {{ car.first_reg_date }}</p>
+                                        <p class="card-text">{{ car.transmission }}</p>
+                                        <p class="card-text">{{ car.fuel }}</p>
+                                        <p class="card-text">{{ car.km }} KM</p>
+                                        <p class="card-text">Price : {{ car.price }} Euro</p>
+                                        <div class="navbar">
+                                            <a href="{% url 'car details' car.pk %}"
+                                               class="btn btn-secondary btn-sm">Seе</a>
+                                            <a href="{% url 'edit car' car.pk %}"
+                                               class="btn btn-secondary btn-sm">Edit</a>
+                                            <a href="{% url 'delete car' car.pk %}"
+                                               class="btn btn-secondary btn-sm">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {#                        </div>#}
+                            </div>
+                            {#                </div>#}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if trucks %}
+                    <div class="row mb-5">
+                        {% for truck in trucks %}
+                            <div class="col-sm-6">
+                                <div class="card ml-3 mb-3" style="width: 15rem;">
+                                    <img src="{{ truck.photo }}"
+                                         class="card-img-top" alt="Photo description">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ truck.brand }} {{ truck.model }}</h5>
+                                        <p class="card-text">First registration : {{ truck.first_reg_date }}</p>
+                                        <p class="card-text">{{ truck.transmission }}</p>
+                                        <p class="card-text">{{ truck.fuel }}</p>
+                                        <p class="card-text">{{ truck.kilometers }} KM</p>
+                                        <p class="card-text">Price : {{ truck.price }} Euro</p>
+                                        <div class="navbar">
+                                            <a href="{% url 'truck details' truck.pk %}"
+                                               class="btn btn-secondary btn-sm">Seе</a>
+                                            <a href="{% url 'edit truck' truck.pk %}"
+                                               class="btn btn-secondary btn-sm">Edit</a>
+                                            <a href="{% url 'delete truck' truck.pk %}"
+                                               class="btn btn-secondary btn-sm">Delete</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
-                </div>
-                </div>
-            {% endfor %}
-        {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>

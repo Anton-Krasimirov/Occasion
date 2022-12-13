@@ -1,8 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-# from Occasion.accounts.models import OccasionUser
-
 UserModel = get_user_model()
 
 
@@ -51,19 +49,63 @@ class Car(models.Model):
 
     photo = models.URLField(null=False, blank=False, )
 
+    photo2 = models.URLField(null=False, blank=False, )
+
+    photo3 = models.URLField(null=False, blank=False, )
+
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, )
 
     def __str__(self):
         return f'{self.brand} {self.model}'
 
-#
-# class CarPhoto(models.Model):
-#     photo = models.URLField(help_text='The photo must not be duplicated !')
-#
-#     description = models.CharField(max_length=150, null=True, blank=True, )
-#
-#     car = models.ForeignKey(Car, on_delete=models.CASCADE, )
 
+class Truck(models.Model):
+    MANUAL = 'Manual'
+    AUTOMATIC = 'Automatic'
 
+    DIESEL = "Diesel"
+    GASOLINE = "Gasoline"
 
+    BOX = 'Box'
+    CAR_CARRIER = 'Car carrier'
+    DUMPER_TRUCK = 'Dumper truck'
+    FOOD_CARRIER = 'Food Carrier'
+    GRAIN_TRUCK = 'Grain Truck'
+    MINING_TRUCK = 'Mining Truck'
+    HYDRAULIC_PLATFORM = 'Hydraulic Platform'
+    OVER_TRUCKS_OVER = 'Over truck over 7.5 t'
 
+    TYPES_FUEL = [(x, x) for x in (DIESEL, GASOLINE,)]
+    CATEGORY = [(x, x) for x in (BOX, CAR_CARRIER, DUMPER_TRUCK, FOOD_CARRIER, GRAIN_TRUCK, MINING_TRUCK,
+                                 HYDRAULIC_PLATFORM, OVER_TRUCKS_OVER)]
+    TYPE_TRANSMISSION = [(x, x) for x in (MANUAL, AUTOMATIC,)]
+
+    brand = models.CharField(max_length=15, null=False, blank=False, )
+
+    model = models.CharField(max_length=15, null=False, blank=False, )
+
+    color = models.CharField(max_length=15, )
+
+    fuel = models.CharField(max_length=max(len(x) for (x, _) in TYPES_FUEL), choices=TYPES_FUEL, )
+
+    category = models.CharField(max_length=max(len(x) for (x, _) in CATEGORY), choices=CATEGORY, null=True,
+                                blank=True, )
+
+    first_reg_date = models.DateField(null=False, blank=False, )
+
+    price = models.CharField(max_length=15, null=False, blank=False, )
+
+    kilometers = models.CharField(max_length=15, null=False, blank=False, )
+
+    transmission = models.CharField(max_length=max(len(x) for (x, _) in TYPE_TRANSMISSION), choices=TYPE_TRANSMISSION, )
+
+    photo = models.URLField(null=False, blank=False, )
+
+    photo2 = models.URLField(null=True, blank=True, )
+
+    photo3 = models.URLField(null=True, blank=True, )
+
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, )
+
+    def __str__(self):
+        return f'{self.brand} {self.model}'

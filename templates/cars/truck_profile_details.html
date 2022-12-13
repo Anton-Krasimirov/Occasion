@@ -3,14 +3,14 @@
 {% block page_content %}
     <body style="background-color:#20c997;"></body>
     <h1 class='text-center'>
-        {% if car %}
+        {% if truck %}
             Advertisement Details
         {% else %}
-            No car photos yet
+            No truck photos yet
         {% endif %}
     </h1>
-    <a href="{% url 'all cars' %}" class="btn btn-primary">All Cars</a>
     <a href="{% url 'all trucks' %}" class="btn btn-primary">All Trucks</a>
+    <a href="{% url 'all cars' %}" class="btn btn-primary">All Cars</a>
     <a href="{% url 'logout user' %}" class="btn btn-primary">Logout</a>
     {% if not request.user.firmprofile %}
         <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Your Profile</a>
@@ -25,36 +25,36 @@
         <h1 class='text=center'>Owner phone number: {{ object.user.firmprofile.phone }}</h1>
         <h1 class='text=center'>Region : {{ object.user.firmprofile.region }}</h1>
     {% endif %}
-    {% if car %}
+    {% if truck %}
 {#        <div class="container mb-5">#}
             <div class="row mb-5">
                 <div class="col-sm-6">
                     <div class="card ml-3 mb-3" style="width: 15rem;">
                         <!-- Image -->
-                        <img src="{{ car.photo }}"
+                        <img src="{{ truck.photo }}"
                              class="card-img-top" alt="Photo description">
                         <div class="card-body">
 
-                            <h5 class="card-title">{{ car.brand }}  {{ car.model }}</h5>
-                            <p class="card-text">First registration : {{ car.first_reg_date }}</p>
-                            <p class="card-text">Transmission : {{ car.transmission }}</p>
-                            <p class="card-text">Fuel : {{ car.fuel }}</p>
-                            <p class="card-text">{{ car.km }} KM</p>
-                            <p class="card-text">Price : {{ car.price }} Euro</p>
+                            <h5 class="card-title">{{ truck.brand }}  {{ truck.model }}</h5>
+                            <p class="card-text">First registration : {{ truck.first_reg_date }}</p>
+                            <p class="card-text">Transmission : {{ truck.transmission }}</p>
+                            <p class="card-text">Fuel : {{ truck.fuel }}</p>
+                            <p class="card-text">{{ truck.km }} KM</p>
+                            <p class="card-text">Price : {{ truck.price }} Euro</p>
                             {% if is_owner %}
                             <div class="navbar">
-                                <a href="{% url 'edit car' car.id %}" class="btn btn-secondary btn-sm">Edit</a>
-                                <a href="{% url 'delete car' car.id %}" class="btn btn-secondary btn-sm">Delete</a>
+                                <a href="{% url 'edit truck' truck.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                                <a href="{% url 'delete truck' truck.id %}" class="btn btn-secondary btn-sm">Delete</a>
                             </div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                            <div class="col-sm-6">
                     <div class="card ml-3 mb-3" style="width: 15rem;">
                             <div>
-                                {% if car.photo2 %}
-                                    <img src="{{ car.photo2 }}" alt="HTML5 Icon" style="width:328px;height:228px;">
+                                {% if truck.photo2 %}
+                                    <img src="{{ truck.photo2 }}" alt="HTML5 Icon" style="width:328px;height:228px;">
                                 {% endif %}
 
                             </div>
@@ -62,19 +62,15 @@
                 <div class="col-sm-6">
                     <div class="card ml-3 mb-3" style="width: 15rem;">
                         <div>
-                            {% if car.photo3 %}
-                                <img src="{{ car.photo3 }}" alt="HTML5 Icon" style="width:328px;height:228px;">
+                            {% if truck.photo3 %}
+                                <img src="{{ truck.photo3 }}" alt="HTML5 Icon" style="width:328px;height:228px;">
                             {% endif %}
 
                         </div>
                     </div>
-{#        </div>#}
-{#        {% if is_owner %}#}
+            </div>
 
 
-
-
-{#        {% endif %}#}
     {% endif %}
 
 
