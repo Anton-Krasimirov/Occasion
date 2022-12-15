@@ -1,9 +1,10 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
-
+from django.forms import TextInput
 
 from Occasion.accounts.helpers import BootstrapFormMixin
 from Occasion.accounts.models import UserProfile, FirmProfile
+from Occasion.accounts.validators import phone_number_validator, validate_only_letters
 
 
 class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
@@ -11,17 +12,19 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
         super().__init__(*args, **kwargs)
         self._init_bootstrap_form_controls()
 
-    first_name = forms.CharField(max_length=30, )
+    first_name = forms.CharField(max_length=30, widget=TextInput(attrs={'type': 'name'}),
+                                 validators=[validate_only_letters])
 
-    last_name = forms.CharField(max_length=30, )
+    last_name = forms.CharField(max_length=30, widget=TextInput(attrs={'type': 'name'}),
+                                validators=[validate_only_letters])
 
     email = forms.EmailField(max_length=254, )
 
-    phone = forms.CharField(max_length=10, required=False,)
+    # phone = forms.CharField(max_length=10, required=False,)
+    phone = forms.CharField(label='Phone Number', widget=TextInput(attrs={'type': 'number'}),
+                            validators=[phone_number_validator])
 
     region = forms.CharField(max_length=30, required=False)
-
-
 
     def save(self, commit=True):
         user = super().save(commit=commit)
@@ -41,24 +44,20 @@ class UserCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     class Meta:
         model = get_user_model()
-        # model = UserProfile
         fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'phone', 'region')
-        # fields = '__all__'
-
-
 
 
 class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
-
     firm_name = forms.CharField(max_length=30, )
 
     email = forms.EmailField(max_length=254, )
 
     region = forms.CharField(max_length=30, )
 
-    address = forms.CharField(widget=forms.Textarea(attrs={'rows': 2,}), )
+    address = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, }), )
 
-    phone = forms.CharField(max_length=10, required=False,)
+    phone = forms.CharField(label='Phone Number', widget=TextInput(attrs={'type': 'number'}),
+                            validators=[phone_number_validator])
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -66,7 +65,6 @@ class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
 
     def save(self, commit=True):
         user = super().save(commit=commit)
-
 
         profile = FirmProfile(
 
@@ -84,7 +82,7 @@ class FirmProfileCreateForm(auth_forms.UserCreationForm, BootstrapFormMixin):
     class Meta:
         model = get_user_model()
         fields = ('firm_name', 'password1', 'password2', 'email', 'phone', 'region', 'address')
-        widgets = {'address': forms.Textarea(attrs={'rows': 2,},)}
+        widgets = {'address': forms.Textarea(attrs={'rows': 2, }, )}
 
 
 class EditUserProfileForm(auth_forms.UserCreationForm, BootstrapFormMixin):

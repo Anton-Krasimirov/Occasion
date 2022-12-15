@@ -1,3 +1,5 @@
+from django import views
+from django.http import HttpResponse
 
 
 class BootstrapFormMixin:
@@ -11,3 +13,7 @@ class BootstrapFormMixin:
                 field.widget.attrs['class'] = ''
             field.widget.attrs['class'] += 'form-control'
 
+
+class InternalErrorView(views.View):
+    def get(self, request):
+        return HttpResponse('THE URL IS NOT CORRECT !')

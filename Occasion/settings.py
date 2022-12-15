@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-w9ib_ppjd#vya!&q#rx)#a!3$8@yp7ekv8@)f_ta-(5q@%4ex1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 CARS_OCCASION_APPS = (
     'Occasion.accounts',
@@ -37,6 +37,7 @@ THIRD_PARTY_APPS = (
 INSTALLED_APPS = CARS_OCCASION_APPS + DJANGO_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
+    'Occasion.middlewares.handle_exception',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

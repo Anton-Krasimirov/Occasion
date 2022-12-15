@@ -1,3 +1,5 @@
+import re
+
 from django.core.exceptions import ValidationError
 
 
@@ -8,12 +10,6 @@ def validate_only_letters(value):
             raise ValidationError('Value must contain only letters')
 
 
-class MaxFileSizeInValidator:
-    def __init__(self, max_size):
-        self.max_size = max_size
-
-    def __call__(self, value):
-        filesize = value.file.size
-        if filesize > self.max_size * 1024 * 1024:
-            raise ValidationError("Max file size is %sMB" % str(self.max_size))
-
+def phone_number_validator(value):
+    if not re.compile(r'^[+|0|00]\d{7,13}$').match(value):
+        raise ValidationError('Enter Phone Number Correctly')

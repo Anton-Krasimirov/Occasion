@@ -22,15 +22,16 @@ class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
 
 class UserProfile(models.Model):
-    phoneNumberRegex = RegexValidator(regex=r"^[+|0]\d{9,12}$")
+    # phoneNumberRegex = RegexValidator(regex=r"^[+|0|00]\d{7,13}$")
 
-    first_name = models.CharField(max_length=30, null=False, blank=False, validators=(validate_only_letters,))
+    first_name = models.CharField(max_length=30, null=False, blank=False,)
 
-    last_name = models.CharField(max_length=30, null=False, blank=False, validators=(validate_only_letters,))
+    last_name = models.CharField(max_length=30, null=False, blank=False,)
 
     email = models.EmailField(unique=True, null=False, blank=False, )
 
-    phone = models.CharField(validators=[phoneNumberRegex], max_length=10,  null=False, blank=False, )
+    # phone = models.IntegerField(validators=[phoneNumberRegex], null=False, blank=False, )
+    phone = models.CharField(max_length=15, null=False, blank=False, )
 
     region = models.CharField(max_length=30, null=False, blank=False, )
 
@@ -46,9 +47,9 @@ class UserProfile(models.Model):
 
 
 class FirmProfile(models.Model):
-    phoneNumberRegex = RegexValidator(regex=r"^[+|0]\d{9,12}$")
+    # phoneNumberRegex = RegexValidator(regex=r"^[+|0|00]\d{7,13}$")
 
-    firm_name = models.CharField(max_length=30, null=False, blank=False, validators=(validate_only_letters,))
+    firm_name = models.CharField(max_length=30, null=False, blank=False,)
 
     email = models.EmailField(unique=True, null=False, blank=False, )
 
@@ -56,7 +57,8 @@ class FirmProfile(models.Model):
 
     address = models.TextField(null=False, blank=False, )
 
-    phone = models.CharField(validators=[phoneNumberRegex], max_length=10, null=False, blank=False, )
+    # phone = models.IntegerField(validators=[phoneNumberRegex], null=False, blank=False, )
+    phone = models.CharField(max_length=15, null=False, blank=False, )
 
     user = models.OneToOneField(
         OccasionUser,
