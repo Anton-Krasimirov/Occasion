@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 
 from Occasion.accounts.managers import OccasionUserManager
-from Occasion.accounts.validators import validate_only_letters
-from django.core.validators import RegexValidator
+# from Occasion.accounts.validators import validate_only_letters
+# from django.core.validators import RegexValidator
 
 
 class OccasionUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -41,9 +41,6 @@ class UserProfile(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
 
 
 class FirmProfile(models.Model):
