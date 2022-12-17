@@ -1,4 +1,4 @@
-from django.core.exceptions import ValidationError
+
 from django.test import TestCase
 
 from Occasion.accounts.forms import UserCreateForm
