@@ -29,8 +29,6 @@ class TruckDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
     template_name = 'cars/truck_profile_details.html'
     context_object_name = 'truck'
 
-    # def get_queryset(self):
-    #     return Car.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -63,7 +61,10 @@ class DeleteTruckView(views.DeleteView):
     template_name = 'cars/delete_truck.html'
 
     def get_success_url(self):
-        try:
-            return reverse_lazy('firm details', kwargs={'pk': self.request.user.firmprofile.user_id}, )
-        except:
-            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+        if not self.request.user.is_staff:
+            try:
+                return reverse_lazy('firm details', kwargs={'pk': self.request.user.firmprofile.user_id}, )
+            except:
+                return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+        else:
+            return reverse_lazy('all trucks')

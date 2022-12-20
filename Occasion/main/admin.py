@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from Occasion.main.models import Car
+from Occasion.main.models import Car, Truck, Motorbike
+
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
@@ -8,4 +9,10 @@ class CarAdmin(admin.ModelAdmin):
     # sortable_by = ('brand',)
     pass
 
+@admin.register(Truck)
+class TruckAdmin(admin.ModelAdmin):
+    pass
 
+@admin.register(Motorbike)
+class MotorAdmin(admin.ModelAdmin):
+    pass

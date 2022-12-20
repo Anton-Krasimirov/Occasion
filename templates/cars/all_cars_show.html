@@ -9,7 +9,9 @@
         <h1 class='text-center'>If you want to see additional information you should be Logged<a href="{% url 'login user' %}" class="btn btn-lg btn-secondary"><strong>User Login</strong></a></h1>
     {% endif %}
     <a class="btn btn-lg btn-secondary" href="javascript:history.back()"><strong>Back</strong></a>
+    {% if not user.is_staff and request.user.is_authenticated %}
     <a href="{% url 'create car' %}" class="btn btn-lg btn-secondary"><strong>Add Car</strong></a>
+    {% endif %}
     <a href="{% url 'all trucks' %}" class="btn btn-lg btn-secondary"><strong>All Trucks</strong></a>
     <a href="{% url 'all motors' %}" class="btn btn-lg btn-secondary"><strong>All Motors</strong></a>
         {% if user_cars %}
@@ -23,20 +25,19 @@
                                      class="card-img-top" alt="Photo description">
                                 <div class="card-body">
 
-                                    <h5 class="card-title">{{ car.brand }}{{ car.model }}</h5>
+                                    <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
                                     <p class="card-text">First registration : {{ car.first_reg_date }}</p>
                                     <p class="card-text">{{ car.transmission }}</p>
                                     <p class="card-text">{{ car.fuel }}</p>
                                     {% if request.user.is_authenticated %}
                                     <div class="navbar">
                                         <a href="{% url 'car details' car.pk %}"
-                                           class="btn btn-lg btn-secondary">Car`s detail</a>
+                                           class="btn btn-lg btn-secondary">Car details</a>
                                     </div>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
-{#                </div>#}
 
             {% endfor %}
             </div>

@@ -60,7 +60,10 @@ class DeleteMotorView(views.DeleteView):
     template_name = 'cars/delete_motor.html'
 
     def get_success_url(self):
-        try:
-            return reverse_lazy('firm details', kwargs={'pk': self.request.user.firmprofile.user_id}, )
-        except:
-            return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+        if not self.request.user.is_staff:
+            try:
+                return reverse_lazy('firm details', kwargs={'pk': self.request.user.firmprofile.user_id}, )
+            except:
+                return reverse_lazy('profile details', kwargs={'pk': self.request.user.id}, )
+        else:
+            return reverse_lazy('all motors')

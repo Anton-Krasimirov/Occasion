@@ -35,7 +35,7 @@ class Car(models.Model):
     body_style = models.CharField(max_length=max(len(x) for (x, _) in BODY_STYLES), choices=BODY_STYLES, null=True,
                                   blank=True, )
 
-    km = models.CharField(max_length=15, null=False, blank=False, )  # TODO fix the field
+    km = models.CharField(max_length=15, null=False, blank=False, )
 
     first_reg_date = models.DateField(null=False, blank=False, )
 
@@ -49,14 +49,11 @@ class Car(models.Model):
 
     photo = models.URLField(null=False, blank=False, )
 
-    photo2 = models.URLField(null=False, blank=False, )
+    photo2 = models.URLField(null=True, blank=True, )
 
-    photo3 = models.URLField(null=False, blank=False, )
+    photo3 = models.URLField(null=True, blank=True, )
 
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, )
-
-    def __str__(self):
-        return f'{self.brand} {self.model}'
 
 
 class Truck(models.Model):
@@ -107,18 +104,11 @@ class Truck(models.Model):
 
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, )
 
-    def __str__(self):
-        return f'{self.brand} {self.model}'
-
-
 class Motorbike(models.Model):
     DIESEL = "Diesel"
     PETROL = "Petrol"
     ELECTRIC = "Electric"
     OTHER = "Other"
-
-    MANUAL = 'Manual'
-    AUTOMATIC = 'Automatic'
 
     NAKED_BIKE = "Naked Bike"
     SCOOTER = "Scooter"
@@ -126,8 +116,8 @@ class Motorbike(models.Model):
     MOTORCYCLE = "Motorcycle"
     ENDURO = "Enduro"
 
-    TYPE_TRANSMISSION = [(x, x) for x in (MANUAL, AUTOMATIC,)]
     CATEGORY = [(x, x) for x in (NAKED_BIKE, SCOOTER, CHOPPER, MOTORCYCLE, ENDURO,)]
+
     TYPES_FUEL = [(x, x) for x in (DIESEL, PETROL, ELECTRIC, OTHER)]
 
     brand = models.CharField(max_length=15, null=False, blank=False, )
@@ -151,6 +141,3 @@ class Motorbike(models.Model):
     photo3 = models.URLField(null=True, blank=True, )
 
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, )
-
-    def __str__(self):
-        return f'{self.brand} {self.model}'

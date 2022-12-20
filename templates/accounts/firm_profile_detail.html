@@ -28,8 +28,9 @@
                 <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-sm">Dashboard</a>
                 <a href="{% url 'edit firm' user.pk %}" class="btn btn-secondary btn-sm">Edit profile</a>
                 <a href="{% url 'firm delete' user.pk %}" class="btn btn-secondary btn-sm">Delete profile</a>
-                <a href="{% url 'create car' %}" class="btn btn-secondary btn-sm">Add Car Advisement</a>
-                <a href="{% url 'create truck' %}" class="btn btn-secondary btn-sm">Add Truck Advisement</a>
+                <a href="{% url 'create car' %}" class="btn btn-secondary btn-sm">Add Car Advertisement</a>
+                <a href="{% url 'create truck' %}" class="btn btn-secondary btn-sm">Add Truck Advertisement</a>
+                <a href="{% url 'create motor' %}" class="btn btn-secondary btn-sm">Add Motor Advertisement</a>
                 <a href="{% url 'logout user' %}" class="btn btn-secondary btn-sm">Logout</a>
                 <a class="btn btn-secondary btn-sm" href="javascript:history.back()">Back</a>
                 {% if cars %}
@@ -58,9 +59,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {#                        </div>#}
                             </div>
-                            {#                </div>#}
                         {% endfor %}
                     </div>
                 {% endif %}

@@ -13,12 +13,13 @@
     <a href="{% url 'all trucks' %}" class="btn btn-primary">All Trucks</a>
     <a href="{% url 'all motors' %}" class="btn btn-primary">All Motors</a>
     <a href="{% url 'logout user' %}" class="btn btn-primary">Logout</a>
-    {% if not request.user.firmprofile %}
-        <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Your Profile</a>
-    {% else %}
-        <a href="{% url 'firm details' request.user.id %}" class="btn btn-primary">Your Profile</a>
+    {% if not user.is_staff %}
+        {% if not request.user.firmprofile %}
+            <a href="{% url 'profile details' request.user.id %}" class="btn btn-primary">Your Profile</a>
+        {% else %}
+            <a href="{% url 'firm details' request.user.id %}" class="btn btn-primary">Your Profile</a>
+        {% endif %}
     {% endif %}
-
     {% if object.user.userprofile.phone %}
         <h1 class='text=end'>Owner phone number: {{ object.user.userprofile.phone }}</h1>
         <h1 class='text=end'>Region : {{ object.user.userprofile.region }}</h1>
@@ -42,7 +43,7 @@
                             <p class="card-text">Fuel : {{ car.fuel }}</p>
                             <p class="card-text">{{ car.km }} KM</p>
                             <p class="card-text">Price : {{ car.price }} Euro</p>
-                            {% if is_owner %}
+                            {% if is_owner or user.is_superuser %}
                             <div class="navbar">
                                 <a href="{% url 'edit car' car.id %}" class="btn btn-secondary btn-sm">Edit</a>
                                 <a href="{% url 'delete car' car.id %}" class="btn btn-secondary btn-sm">Delete</a>
@@ -69,13 +70,7 @@
 
                         </div>
                     </div>
-{#        </div>#}
-{#        {% if is_owner %}#}
 
-
-
-
-{#        {% endif %}#}
     {% endif %}
 
 

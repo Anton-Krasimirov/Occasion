@@ -26,6 +26,7 @@ urlpatterns = (
     path('create/motor/', CreateMotorView.as_view(), name='create motor'),
     path('motor/details/<int:pk>/', MotorDetailsView.as_view(), name='motor details'),
     path('edit/motor/<int:pk>/', EditMotorView.as_view(), name='edit motor'),
-    path('motor/all_motors/', AllMotorsView.as_view(), name='all motors'),
     path('motor/delete/<int:pk>/', DeleteMotorView.as_view(), name='delete motor'),
+    path('motor/all_motors/', AllMotorsView.as_view(), name='all motors'),
+
 )
